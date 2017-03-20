@@ -1,8 +1,10 @@
 * Load data from SDK : OK
-* cache, cluster
 * Map basic: OK
-* Map - selector
-* Good UI
+* Good app structure (MVP, dependance injection, lib with all non android stuff)
+* cache queries, optimize data size, cluster and pagination
+* Unit tests and Android tests
+* Map - selector custom widget
+* Good UI design
 * To android calendar integration
 * Form to register a tourney
 * Form to give feedback / vote for next features
@@ -11,5 +13,5 @@
 
 * CLI build with docker (wercker, ship)
 * Configure checkstyles, lint
-* Configure apiKey not in git
+* Configure apiKey not in git (googleMaps, SigningKey)
 *
