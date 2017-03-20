@@ -14,8 +14,9 @@ Implementing features useful for bohurt into a android app
 * Share the app button and link to store for voting
 
 Expected release date:
-* beta version before BOTN 2017
-* store release before IMCF 2017
+* alpha: 20 April 2017, before BOTN
+* open beta: 25 Mai 2017, before IMCF 2017
+* store: release when ready
 
 
 ### How to use
