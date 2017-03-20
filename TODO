@@ -1,7 +1,15 @@
-* Load data from SDK
-* Map screen loading
-* Map selector
+* Load data from SDK : OK
+* cache, cluster
+* Map basic: OK
+* Map - selector
+* Good UI
 * To android calendar integration
 * Form to register a tourney
 * Form to give feedback / vote for next features
+* Button 'I am going', registered somewhere to share to other
+
+
+* CLI build with docker (wercker, ship)
+* Configure checkstyles, lint
+* Configure apiKey not in git
 *

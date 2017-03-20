@@ -10,3 +10,4 @@
 .hprof
 build
 *.log
+**/google_maps_api.xml
