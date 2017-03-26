@@ -18,15 +18,20 @@ open class ApiQuery(val dataset: String) {
         return dateFormat.format(date)
     }
 
-    fun rowCount(rows: Int){
+    /**
+     * rows count
+     * page starting with 0 as the first page
+     */
+    fun rowCount(rows: Int = 15, page: Int = 0){
         params.put("rows", rows.toString())
+        params.put("start", (page * rows).toString())
     }
 
-    fun sortBy(fieldName: String, ascending: Boolean){
+    fun sortBy(fieldName: String, ascending: Boolean = false){
         params.put("sort", if(ascending) "+" else "-" + fieldName)
     }
 
-    fun inCircle(lat: Double, lon: Double, meters: Int){
+    fun inCircle(lat: Double, lon: Double, meters: Int = 5000){
         andsQ.add("geofilter.distance=$lat,$lon,$meters")
     }
 

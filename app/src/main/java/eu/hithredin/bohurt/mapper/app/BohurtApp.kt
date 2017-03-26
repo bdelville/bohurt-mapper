@@ -5,6 +5,7 @@ import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.KodeinAware
 import com.github.salomonbrys.kodein.lazy
 import com.squareup.leakcanary.LeakCanary
+import eu.hithredin.bohurt.bohurtlib.modules.initBohurtLib
 import eu.hithredin.bohurt.bohurtlib.modules.libModule
 
 class BohurtApp : Application(), KodeinAware {
@@ -19,5 +20,6 @@ class BohurtApp : Application(), KodeinAware {
             return
         }
         LeakCanary.install(this)
+        initBohurtLib(this)
     }
 }

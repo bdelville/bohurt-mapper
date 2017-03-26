@@ -1,9 +1,12 @@
 * Load data from SDK : OK
 * Map basic: OK
-* Good app structure (MVP, dependance injection, lib with all non android stuff)
-* cache queries, optimize data size, cluster and pagination
+* Good app structure OK
+* cache queries and pagination : OK
 * Unit tests and Android tests
 * Map - selector custom widget
+* Map - ODS Map linked to QueryLoader with clusterisation
+* Extract an ODS Android API (map, query, calendar, ...) into a independant tested library
+* is a bohurt Lib module useful ?
 * Good UI design
 * To android calendar integration
 * Form to register a tourney

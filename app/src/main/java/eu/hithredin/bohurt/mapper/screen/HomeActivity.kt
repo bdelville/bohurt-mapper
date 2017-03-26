@@ -22,7 +22,6 @@ import java.util.*
  * Will be refactored when the qpp evolve.
  */
 class HomeActivity : BaseActivity() {
-    val baseUrl = "https://hithredin.my.opendatasoft.com/api/records/1.0/search/?dataset=bohurt-events"
     private lateinit var googleMap: GoogleMap
     private val logger = KotlinLogging.logger {}
     val apiLoader: ApiLoader<EventData> by injector.instance()
@@ -49,16 +48,18 @@ class HomeActivity : BaseActivity() {
         try {
             val query = EventQuery().dateStart(Date())
             apiLoader.queryList(query) { req, res, result ->
-                val (data, err) = result
-                Toast.makeText(this, "Loading end", Toast.LENGTH_SHORT).show()
-                logger.info { "Result query:\n$data \n$err" }
-
-                data?.data()?.forEach { event ->
-                    val point = LatLng(event.location.lat(), event.location.lon())
-                    googleMap.addMarker(MarkerOptions()
-                            .position(point)
-                            .title(event.event_name))
-                }
+                result.fold({
+                    logger.info { "Result query:\n$it" }
+                    it.data()?.forEach { event ->
+                        val point = LatLng(event.location.lat(), event.location.lon())
+                        googleMap.addMarker(MarkerOptions()
+                                .position(point)
+                                .title(event.event_name))
+                    }
+                }, {
+                    Toast.makeText(this, "Loading end with error", Toast.LENGTH_SHORT).show()
+                    logger.error { "Result query:\n$it" }
+                })
             }
         } catch (e: Exception) {
             e.printStackTrace()

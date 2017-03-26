@@ -1,5 +1,7 @@
 package eu.hithredin.bohurt.bohurtlib.modules
 
+import android.app.Application
+import com.github.kittinunf.fuse.core.Fuse
 import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.singleton
@@ -13,4 +15,8 @@ val libModule = Kodein.Module {
     bind<ApiLoader<EventData>>() with singleton {
         ApiLoader("hithredin", EventData.Deserializer())
     }
+}
+
+fun initBohurtLib(app: Application){
+    Fuse.init(app.cacheDir.path)
 }
