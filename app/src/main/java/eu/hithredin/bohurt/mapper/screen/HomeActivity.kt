@@ -1,29 +1,31 @@
-package eu.hithredin.bohurt.mapper
+package eu.hithredin.bohurt.mapper.screen
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
-import com.github.kittinunf.fuel.httpGet
+import com.github.salomonbrys.kodein.instance
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import eu.hithredin.bohurt.mapper.modules.events.EventData
+import eu.hithredin.bohurt.bohurtlib.modules.events.EventData
+import eu.hithredin.bohurt.bohurtlib.modules.opendatasoft.ApiLoader
+import eu.hithredin.bohurt.bohurtlib.modules.opendatasoft.EventQuery
+import eu.hithredin.bohurt.mapper.R
 import kotlinx.android.synthetic.main.activity_home.*
-import mu.KLogging
+import mu.KotlinLogging
+import java.util.*
 
 
 /**
- * All feature will be quickly dev here: testing kotlin stuff
- * Clean archi will come later
+ * Main screen of the application.
+ * Will be refactored when the qpp evolve.
  */
-class HomeActivity : AppCompatActivity() {
-
+class HomeActivity : BaseActivity() {
     val baseUrl = "https://hithredin.my.opendatasoft.com/api/records/1.0/search/?dataset=bohurt-events"
     private lateinit var googleMap: GoogleMap
-
-    companion object : KLogging()
+    private val logger = KotlinLogging.logger {}
+    val apiLoader: ApiLoader<EventData> by injector.instance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,22 +47,19 @@ class HomeActivity : AppCompatActivity() {
 
     fun loadData() {
         try {
-            "$baseUrl&q=+start_date_date+%3E%3D+%23now()+&rows=12&sort=-start_date_date"
-                    .httpGet()
-                    .responseObject(EventData.Deserializer()) { req, res, result ->
-                        val (data, err) = result
-                        Toast.makeText(this, "Loading end", Toast.LENGTH_SHORT).show()
-                        logger.info { "Result query:\n$data \n$err" }
+            val query = EventQuery().dateStart(Date())
+            apiLoader.queryList(query) { req, res, result ->
+                val (data, err) = result
+                Toast.makeText(this, "Loading end", Toast.LENGTH_SHORT).show()
+                logger.info { "Result query:\n$data \n$err" }
 
-                        data?.data()?.forEach { event ->
-                            run {
-                                val point = LatLng(event.location.lat(), event.location.lon())
-                                googleMap.addMarker(MarkerOptions()
-                                        .position(point)
-                                        .title(event.event_name))
-                            }
-                        }
-                    }
+                data?.data()?.forEach { event ->
+                    val point = LatLng(event.location.lat(), event.location.lon())
+                    googleMap.addMarker(MarkerOptions()
+                            .position(point)
+                            .title(event.event_name))
+                }
+            }
         } catch (e: Exception) {
             e.printStackTrace()
         }

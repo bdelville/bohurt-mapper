@@ -3,9 +3,17 @@
 buildscript {
     ext.kotlin_version = '1.1.1'
     ext.rxkotlin_version = '0.60.0'
-    ext.support_version = '25.2.0'
+    ext.support_version = '25.3.0'
     ext.leakcanary_version = '1.5'
     ext.constraint_version = '1.0.2'
+    ext.kotson_version = '2.5.0'
+    ext.kotlin_logging_version = '1.4.3'
+    ext.slf4j_android_version = '1.7.21'
+    ext.kodein_version = '3.2.0'
+    ext.fuel_android_version = '1.5.0'
+    ext.play_services_maps_version = '10.2.1'
+    ext.fuel_version = '1.5.0'
+    ext.kodein_version = '3.2.0'
 
     repositories {
         jcenter()

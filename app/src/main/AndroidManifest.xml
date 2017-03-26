@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="eu.hithredin.bohurt.mapper">
     <application
-        android:name=".modules.ButhurtApp"
+        android:name=".app.BohurtApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -17,7 +17,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".HomeActivity">
+        <activity android:name=".screen.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

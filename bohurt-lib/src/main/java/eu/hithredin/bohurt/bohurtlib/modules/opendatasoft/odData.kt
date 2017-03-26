@@ -1,9 +1,9 @@
-package eu.hithredin.bohurt.mapper.modules.opendatasoft
+package eu.hithredin.bohurt.bohurtlib.modules.opendatasoft
 
 /**
- * INSERT DOC
+ * Open Data Soft structure data type
  */
-data class ListResult<T>(val nhits: Int, val records: List<ItemResult<T>>) {
+data class ListResult<T : Any>(val nhits: Int, val records: List<ItemResult<T>>) {
     fun data(): List<T> {
         return records.map { item -> item.fields }
     }

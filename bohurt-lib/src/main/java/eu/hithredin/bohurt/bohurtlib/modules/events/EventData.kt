@@ -1,16 +1,15 @@
-package eu.hithredin.bohurt.mapper.modules.events
+package eu.hithredin.bohurt.bohurtlib.modules.events
 
 import com.github.kittinunf.fuel.core.ResponseDeserializable
 import com.github.salomonbrys.kotson.fromJson
 import com.google.gson.Gson
-import eu.hithredin.bohurt.mapper.modules.genericType
-import eu.hithredin.bohurt.mapper.modules.opendatasoft.Coordinates
-import eu.hithredin.bohurt.mapper.modules.opendatasoft.ListResult
+import eu.hithredin.bohurt.bohurtlib.modules.genericType
+import eu.hithredin.bohurt.bohurtlib.modules.opendatasoft.Coordinates
+import eu.hithredin.bohurt.bohurtlib.modules.opendatasoft.ListResult
 import java.util.*
 
-
 /**
- * INSERT DOC
+ * Tournament, Open training or other bohurt events
  */
 data class EventData(
         val city: String,
@@ -25,7 +24,8 @@ data class EventData(
         val country: String
 ) {
     class Deserializer : ResponseDeserializable<ListResult<EventData>> {
-        override fun deserialize(content: String) =  Gson().fromJson<ListResult<EventData>>(content)
+        override fun deserialize(content: String) = Gson().fromJson<ListResult<EventData>>(content)
     }
 }
+
 val ListResultType = genericType<ListResult<EventData>>()
