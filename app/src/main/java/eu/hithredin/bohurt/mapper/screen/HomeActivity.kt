@@ -45,24 +45,20 @@ class HomeActivity : BaseActivity() {
     }
 
     fun loadData() {
-        try {
-            val query = EventQuery().dateStart(Date())
-            apiLoader.queryList(query) { req, res, result ->
-                result.fold({
-                    logger.info { "Result query:\n$it" }
-                    it.data()?.forEach { event ->
-                        val point = LatLng(event.location.lat(), event.location.lon())
-                        googleMap.addMarker(MarkerOptions()
-                                .position(point)
-                                .title(event.event_name))
-                    }
-                }, {
-                    Toast.makeText(this, "Loading end with error", Toast.LENGTH_SHORT).show()
-                    logger.error { "Result query:\n$it" }
-                })
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
+        val query = EventQuery().dateStart(Date())
+        apiLoader.queryList(query) { req, res, result ->
+            result.fold({
+                logger.info { "Result query:\n$it" }
+                it.data()?.forEach { event ->
+                    val point = LatLng(event.location.lat(), event.location.lon())
+                    googleMap.addMarker(MarkerOptions()
+                            .position(point)
+                            .title(event.event_name))
+                }
+            }, {
+                Toast.makeText(this, "Loading end with error", Toast.LENGTH_SHORT).show()
+                logger.error { "Result query:\n$it" }
+            })
         }
     }
 }
