@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Mapper.iml" filepath="$PROJECT_DIR$/Mapper.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/bohurt-lib/bohurt-lib.iml" filepath="$PROJECT_DIR$/bohurt-lib/bohurt-lib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ktopendatasoft/ktopendatasoft.iml" filepath="$PROJECT_DIR$/ktopendatasoft/ktopendatasoft.iml" />
     </modules>
   </component>
 </project>

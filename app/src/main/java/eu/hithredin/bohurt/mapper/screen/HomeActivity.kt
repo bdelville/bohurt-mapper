@@ -8,9 +8,9 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import eu.hithredin.bohurt.bohurtlib.modules.events.EventData
-import eu.hithredin.bohurt.bohurtlib.modules.opendatasoft.ApiLoader
-import eu.hithredin.bohurt.bohurtlib.modules.opendatasoft.EventQuery
+import eu.hithredin.bohurt.mapper.modules.event.EventData
+import eu.hithredin.ktopendatasoft.ApiLoader
+import eu.hithredin.bohurt.mapper.modules.event.EventQuery
 import eu.hithredin.bohurt.mapper.R
 import kotlinx.android.synthetic.main.activity_home.*
 import mu.KotlinLogging

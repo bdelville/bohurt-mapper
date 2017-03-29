@@ -1,1 +1,1 @@
-include ':app', ':bohurt-lib'
+include ':app', ':ktopendatasoft'

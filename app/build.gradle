@@ -22,7 +22,7 @@ android {
 }
 
 dependencies {
-    compile project(':bohurt-lib')
+    compile project(':ktopendatasoft')
 
     compile "com.android.support:appcompat-v7:$support_version"
     compile "com.android.support.constraint:constraint-layout:$constraint_version"

@@ -5,8 +5,8 @@ import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.KodeinAware
 import com.github.salomonbrys.kodein.lazy
 import com.squareup.leakcanary.LeakCanary
-import eu.hithredin.bohurt.bohurtlib.modules.initBohurtLib
-import eu.hithredin.bohurt.bohurtlib.modules.libModule
+import eu.hithredin.bohurt.mapper.app.initBohurtLib
+import eu.hithredin.bohurt.mapper.app.libModule
 
 class BohurtApp : Application(), KodeinAware {
     override val kodein by Kodein.lazy {
