@@ -22,7 +22,7 @@ class EventQuery : ApiQuery(dataSetEvents) {
     }
 
     fun dateEnd(lastDate: Date): EventQuery {
-        andsQ.add("start_date_date <= " + dateToString(lastDate))
+        andsQ.add("end_date <= " + dateToString(lastDate))
         return this
     }
 }

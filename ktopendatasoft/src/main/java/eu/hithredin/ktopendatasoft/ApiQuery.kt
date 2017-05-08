@@ -36,7 +36,7 @@ open class ApiQuery(val dataset: String) {
     }
 
     open fun buildQuery(): String{
-        return andsQ.reduceIndexed { index, acc, s ->   acc + s + if(index < (andsQ.size - 1)) "AND" else "" }
+        return andsQ.joinToString(" AND ")
     }
 
     open fun buildParams(): HashMap<String, String> {
