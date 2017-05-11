@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Mapper</string>
+    <string name="event_home_title_page">Bohurt events</string>
 </resources>

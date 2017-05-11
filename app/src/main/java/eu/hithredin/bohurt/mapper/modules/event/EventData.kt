@@ -13,13 +13,13 @@ import java.util.*
  */
 data class EventData(
         val city: String,
-        val link_website_contact_social_media_link_with_all_infos: String?,
-        val end_date: Date?,
+        val link: String?,
         val event_name: String,
         val duel_fight_categories: String,
         val group_fight_categories: String,
-        val start_date_date: Date,
-        val location: Coordinates,
+        val date: Date,
+        var location: Coordinates,
+        var end_date: Date?,
         val timestamp: Date,
         val country: String
 ) {
@@ -27,6 +27,9 @@ data class EventData(
         override fun deserialize(content: String) = Gson().fromJson<ListResult<EventData>>(content)
     }
 
+    /**
+     * Sanitize qnd validate after Gson deserialization
+     */
     fun isValid(): Boolean {
         if(event_name == null)
             return false
@@ -35,8 +38,10 @@ data class EventData(
                 return false
             // TODO geocode with google
         }
-        if(start_date_date == null)
+        if(date == null)
             return false
+        if(end_date == null)
+            end_date = date
         return true
     }
 }

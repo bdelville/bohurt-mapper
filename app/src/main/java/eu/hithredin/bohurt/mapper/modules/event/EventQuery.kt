@@ -11,18 +11,18 @@ val dataSetEvents = "bohurt-events"
 class EventQuery : ApiQuery(dataSetEvents) {
 
     fun dateRange(firstDate: Date, lastDate: Date): EventQuery {
-        andsQ.add("start_date_date >= " + dateToString(firstDate))
-        andsQ.add("start_date_date <= " + dateToString(lastDate))
+        andsQ.add("date >= " + dateToString(firstDate))
+        andsQ.add("date <= " + dateToString(lastDate))
         return this
     }
 
     fun dateStart(firstDate: Date): EventQuery {
-        andsQ.add("start_date_date >= " + dateToString(firstDate))
+        andsQ.add("date >= " + dateToString(firstDate))
         return this
     }
 
     fun dateEnd(lastDate: Date): EventQuery {
-        andsQ.add("end_date <= " + dateToString(lastDate))
+        andsQ.add("date <= " + dateToString(lastDate))
         return this
     }
 }

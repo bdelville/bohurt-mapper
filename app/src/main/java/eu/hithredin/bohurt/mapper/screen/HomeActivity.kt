@@ -20,6 +20,7 @@ import mu.KotlinLogging
 import java.util.*
 
 val DAY: Long = HOUR * 24
+val YEAR: Long = DAY * 355
 
 /**
  * Main screen of the application.
@@ -33,14 +34,16 @@ class HomeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+        setTitle(R.string.event_home_title_page)
         /*button_test.setOnClickListener {
             logger.info { "HomeActivity Start to load the data!" }
             loadData()
         }*/
 
         val now = System.currentTimeMillis()
-        date_picker.minDate = now - (10 * DAY)
-        date_picker.maxDate = now + 90 * DAY
+        date_picker.minDate = now - (1 * DAY)
+        date_picker.maxDate = now + YEAR
         date_picker.mode = TimeMode.CUBIC
         date_picker.dateChangeSet = object : DateRangeChangeListener {
             override fun onDateChanged(lowerDate: Long, upperDate: Long) {
@@ -56,6 +59,11 @@ class HomeActivity : BaseActivity() {
     fun mapReady(googleMap: GoogleMap) {
         val europe = LatLng(42.0, 5.0)
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(europe))
+        googleMap.setOnMarkerClickListener({ marker ->
+            val event: EventData = marker.tag as EventData
+            false
+        })
+
         this.googleMap = googleMap
     }
 
@@ -73,9 +81,10 @@ class HomeActivity : BaseActivity() {
                         ?.filter { event -> event.isValid() }
                         ?.forEach { event ->
                             val point = LatLng(event.location.lat(), event.location.lon())
-                            googleMap.addMarker(MarkerOptions()
+                            val marker = googleMap.addMarker(MarkerOptions()
                                     .position(point)
                                     .title(event.event_name))
+                            marker.tag = event
                         }
             }, {
                 Toast.makeText(this, "Loading end with error", Toast.LENGTH_SHORT).show()

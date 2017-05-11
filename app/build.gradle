@@ -23,7 +23,7 @@ android {
 
 dependencies {
     compile project(':ktopendatasoft')
-    compile "com.github.bdelville:easingdate-ranger:0.0.1"
+    compile "com.github.bdelville:easingdate-ranger:0.0.2"
 
     compile "com.android.support:appcompat-v7:$support_version"
     compile "com.android.support.constraint:constraint-layout:$constraint_version"
