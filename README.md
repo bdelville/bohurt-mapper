@@ -1,3 +1,6 @@
+![Connecting Fighters](http://hithredin.eu/img/jQuery-File-Upload-9.8.1/server/php/files/18319009_2290354884523915_8719594987608189811_o.jpg)
+
+
 ## Bohurt App
 
 Implementing features useful for bohurt into a android app
