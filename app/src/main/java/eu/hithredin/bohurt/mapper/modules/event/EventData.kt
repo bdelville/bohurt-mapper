@@ -6,6 +6,7 @@ import com.google.gson.Gson
 import eu.hithredin.ktopendatasoft.Coordinates
 import eu.hithredin.ktopendatasoft.ListResult
 import eu.hithredin.ktopendatasoft.genericType
+import java.io.Serializable
 import java.util.*
 
 /**
@@ -22,7 +23,7 @@ data class EventData(
         var end_date: Date?,
         val timestamp: Date,
         val country: String
-) {
+) : Serializable {
     class Deserializer : ResponseDeserializable<ListResult<EventData>> {
         override fun deserialize(content: String) = Gson().fromJson<ListResult<EventData>>(content)
     }

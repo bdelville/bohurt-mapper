@@ -9,6 +9,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import eu.hithredin.bohurt.mapper.R
+import eu.hithredin.bohurt.mapper.framework.BaseActivity
 import eu.hithredin.bohurt.mapper.modules.event.EventData
 import eu.hithredin.bohurt.mapper.modules.event.EventQuery
 import eu.hithredin.easingdate.DateRangeChangeListener
@@ -52,6 +53,10 @@ class HomeActivity : BaseActivity() {
             }
         }
 
+        // TODO Search by text too (AND)
+        // TODO better font and paddings
+        // TODO Background if searching in the past
+
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this::mapReady)
     }
@@ -61,10 +66,13 @@ class HomeActivity : BaseActivity() {
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(europe))
         googleMap.setOnMarkerClickListener({ marker ->
             val event: EventData = marker.tag as EventData
+            EventActivity.startActivity(this, event)
             false
         })
+        //TODO click on bubble to open activity
 
         this.googleMap = googleMap
+        loadData()
     }
 
     fun loadData() {
@@ -85,6 +93,7 @@ class HomeActivity : BaseActivity() {
                                     .position(point)
                                     .title(event.event_name))
                             marker.tag = event
+                            // TODO Nice icon
                         }
             }, {
                 Toast.makeText(this, "Loading end with error", Toast.LENGTH_SHORT).show()

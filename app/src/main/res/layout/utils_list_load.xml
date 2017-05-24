@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/layout_load">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/info_layout"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true">
+
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:id="@+id/info_title"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:textAlignment="center"
+                tools:text="Your tablet is offline"/>
+
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:id="@+id/info_text"
+                android:layout_marginTop="@dimen/space_small"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:visibility="gone"
+                tools:text="gjkgk iogsdj ogjsdoksdojgsjd jsdgoj "/>
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/info_reload"
+                android:layout_marginTop="@dimen/space_large"
+                android:paddingRight="@dimen/space_large"
+                android:paddingLeft="@dimen/space_large"
+                android:paddingTop="@dimen/space_large"
+                android:paddingBottom="@dimen/space_large">
+
+                <TextView
+                    android:id="@+id/info_reload_text"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textColor="@android:color/white"
+                    tools:text="Try again"
+                    />
+            </RelativeLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/info_load_indicator"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:indeterminateOnly="true"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:keepScreenOn="true" />
+
+</RelativeLayout>
