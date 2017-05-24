@@ -8,4 +8,50 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- TEXT STYLES -->
+    <style name="CardTitle" parent="TextAppearance.AppCompat.Headline">
+        <item name="android:textColor">@android:color/white</item> <!-- TODO Dynamically set color according to bg with Palette -->
+    </style>
+
+    <style name="TextInfo" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:paddingTop">0dip</item>
+        <item name="android:paddingBottom">0dip</item>
+        <item name="android:layout_marginTop">0dip</item>
+        <item name="android:layout_marginBottom">@dimen/space_xsmall</item>
+    </style>
+
+    <style name="TextSubInfo" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textColor">@android:color/holo_blue_bright</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:paddingTop">0dip</item>
+        <item name="android:paddingBottom">0dip</item>
+        <item name="android:layout_marginTop">0dip</item>
+        <item name="android:layout_marginBottom">@dimen/space_xsmall</item>
+    </style>
+
+    <style name="TextAction" parent="TextAppearance.AppCompat.Button">
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="TextTitle" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="TextDateForm" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="FormTitle" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textColor">@color/smallTitleColor</item>
+    </style>
+    <style name="FormSubTitle" parent="TextAppearance.AppCompat.Subhead">
+        <item name="android:textColor">@color/smallTitleColor</item>
+    </style>
+
+    <style name="ErrorText" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textColor">@color/errorColor</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
 </resources>

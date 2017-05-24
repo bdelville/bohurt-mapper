@@ -4,4 +4,6 @@
     <string name="info_error_io">Failed to get the dat. Try again later</string>
     <string name="info_data_empty">Sorry, we found nothing interesting to show here</string>
     <string name="info_error">Something bad happened. Please tell us to we can apply some duck tape</string>
+    <string name="action_link">Link</string>
+    <string name="action_map">Map</string>
 </resources>

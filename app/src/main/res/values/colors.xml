@@ -3,4 +3,25 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+
+    <color name="bg_text_transparent">#6e000000</color>
+    <color name="bg_btn_image_pressed">#ffcecece</color>
+    <color name="white_pressed">#ffcecece</color>
+
+    <color name="smallTitleColor">#039487</color>
+
+    <color name="mainColorText">#ffffffff</color>
+    <color name="mainColor">#ff0099cc</color>
+    <color name="mainColorLight">#ffaaddff</color>
+    <color name="mainColor_pressed">#ffE3F2FD</color>
+    <color name="buttonNegative">#ffff4444</color>
+    <color name="buttonNegative_pressed">#ffFFCDD2</color>
+
+    <color name="selected">#ffCDFFD2</color>
+    <color name="unselected">#ffFFCDD2</color>
+
+    <color name="separator">#aeaeae</color>
+
+    <color name="errorColor">#ffff4444</color>
 </resources>

@@ -1,6 +1,5 @@
 package eu.hithredin.bohurt.mapper.screen
 
-import android.os.Bundle
 import android.view.View
 import eu.hithredin.bohurt.mapper.R
 import eu.hithredin.bohurt.mapper.app.DATA_KEY
@@ -26,19 +25,14 @@ class EventFragment : BaseRecyclerFragment<EventData>() {
     }
 
     override fun loadListQuery() {
-
+        eventSelected = arguments.getSerializable(DATA_KEY) as EventData
+        adapter.addData(eventSelected)
+        adapter.notifyDataSetChanged()
     }
 
     lateinit var eventSelected: EventData
 
     override fun fragmentLayout(): Int{
         return R.layout.fragment_event
-    }
-
-    override fun populateViews(savedInstanceState: Bundle?) {
-        super.populateViews(savedInstanceState)
-        eventSelected = arguments.getSerializable(DATA_KEY) as EventData
-
-        adapter.addData(eventSelected)
     }
 }
