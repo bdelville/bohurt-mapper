@@ -27,5 +27,15 @@ Expected release date:
 
 ### Coding
 
+To set-up the environment to build, you need:
+
+A googleMap apiKey
+* Create a file app/res/google_maps_api.xml
+* Get you api key here:
+* fill teh data :
+```
+TODO Code hre
+```
+
 
 
