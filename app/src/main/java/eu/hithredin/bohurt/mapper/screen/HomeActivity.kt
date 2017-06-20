@@ -6,8 +6,7 @@ import com.github.salomonbrys.kodein.instance
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import eu.hithredin.bohurt.mapper.R
 import eu.hithredin.bohurt.mapper.framework.BaseActivity
 import eu.hithredin.bohurt.mapper.modules.event.EventData
@@ -31,22 +30,19 @@ class HomeActivity : BaseActivity() {
     private lateinit var googleMap: GoogleMap
     private val logger = KotlinLogging.logger {}
     val apiLoader: ApiLoader<EventData> by injector.instance()
+    private lateinit var iconTourney: BitmapDescriptor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-
         setTitle(R.string.event_home_title_page)
-        /*button_test.setOnClickListener {
-            logger.info { "HomeActivity Start to load the data!" }
-            loadData()
-        }*/
+        iconTourney = BitmapDescriptorFactory.fromResource(R.drawable.map_icon_tourney)
 
         val now = System.currentTimeMillis()
-        date_picker.minDate = now - (1 * DAY)
-        date_picker.maxDate = now + YEAR
-        date_picker.mode = TimeMode.CUBIC
-        date_picker.dateChangeSet = object : DateRangeChangeListener {
+        search_date_picker.minDate = now - (1 * DAY)
+        search_date_picker.maxDate = now + YEAR
+        search_date_picker.mode = TimeMode.CUBIC
+        search_date_picker.dateChangeSet = object : DateRangeChangeListener {
             override fun onDateChanged(lowerDate: Long, upperDate: Long) {
                 Toast.makeText(this@HomeActivity, "Loading the data", Toast.LENGTH_SHORT).show()
                 loadData()
@@ -54,23 +50,33 @@ class HomeActivity : BaseActivity() {
         }
 
         // TODO Search by text too (OR)
-        // TODO better font and paddings
-        // TODO Background if searching in the past
+        /*search_query.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                s.toString()
+            }
+        })*/
 
+        // TODO Background switching color if searching in the past
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this::mapReady)
     }
 
     fun mapReady(googleMap: GoogleMap) {
+        googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.map_style))
+
         val europe = LatLng(42.0, 5.0)
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(europe))
         googleMap.setOnMarkerClickListener({ marker ->
             val event: EventData = marker.tag as EventData
-            EventActivity.startActivity(this, event)
+            // Enable details feature when ready
+            //EventActivity.startActivity(this, event)
             false
         })
-        //TODO click on bubble to open activity
 
+        // TODO Fix the date chooser that is broken
+
+        googleMap.uiSettings.isZoomControlsEnabled = true
+        googleMap.uiSettings.isTiltGesturesEnabled = false
         this.googleMap = googleMap
         loadData()
     }
@@ -78,8 +84,8 @@ class HomeActivity : BaseActivity() {
     fun loadData() {
         googleMap.clear()
         val query = EventQuery()
-                .dateStart(Date(date_picker.lowerDate))
-                .dateEnd(Date(date_picker.upperDate))
+                .dateStart(Date(search_date_picker.lowerDate))
+                .dateEnd(Date(search_date_picker.upperDate))
 
         apiLoader.queryList(query) { req, res, result ->
             result.fold({
@@ -91,9 +97,9 @@ class HomeActivity : BaseActivity() {
                             val point = LatLng(event.location.lat(), event.location.lon())
                             val marker = googleMap.addMarker(MarkerOptions()
                                     .position(point)
+                                    .icon(iconTourney)
                                     .title(event.event_name))
                             marker.tag = event
-                            // TODO Nice icon
                         }
             }, {
                 Toast.makeText(this, "Loading end with error", Toast.LENGTH_SHORT).show()

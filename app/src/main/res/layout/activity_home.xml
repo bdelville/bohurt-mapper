@@ -4,25 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="eu.hithredin.bohurt.mapper.screen.HomeActivity"
-    android:paddingLeft="5dip"
-    android:paddingRight="5dip">
+    tools:context="eu.hithredin.bohurt.mapper.screen.HomeActivity">
 
-    <TextView
+    <EditText
+        android:id="@+id/search_query"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Date choosing"
+        android:layout_marginTop="10dip"
+        android:hint="@string/search_query_hint"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/textView"
-        android:layout_marginTop="10dip"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <eu.hithredin.easingdate.EDatePickerView
-        android:id="@+id/date_picker"
+    <TextView
+        android:id="@+id/title_date"
+        style="@style/TextTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/textView"/>
+        android:layout_marginTop="10dip"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:text="@string/search_date_title"
+        app:layout_constraintTop_toBottomOf="@id/search_query" />
+
+    <eu.hithredin.easingdate.EDatePickerView
+        android:id="@+id/search_date_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        app:layout_constraintTop_toBottomOf="@id/title_date" />
 
     <fragment
         android:id="@+id/map"
@@ -32,7 +45,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/date_picker"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_date_picker" />
 
 </android.support.constraint.ConstraintLayout>

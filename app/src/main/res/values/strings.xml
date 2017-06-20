@@ -6,4 +6,6 @@
     <string name="info_error">Something bad happened. Please tell us to we can apply some duck tape</string>
     <string name="action_link">Link</string>
     <string name="action_map">Map</string>
+    <string name="search_date_title">Date choosing</string>
+    <string name="search_query_hint">Text to search</string>
 </resources>
