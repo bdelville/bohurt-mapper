@@ -73,8 +73,6 @@ class HomeActivity : BaseActivity() {
             false
         })
 
-        // TODO Fix the date chooser that is broken
-
         googleMap.uiSettings.isZoomControlsEnabled = true
         googleMap.uiSettings.isTiltGesturesEnabled = false
         this.googleMap = googleMap
