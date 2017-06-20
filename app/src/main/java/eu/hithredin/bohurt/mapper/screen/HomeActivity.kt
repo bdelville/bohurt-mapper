@@ -53,7 +53,7 @@ class HomeActivity : BaseActivity() {
             }
         }
 
-        // TODO Search by text too (AND)
+        // TODO Search by text too (OR)
         // TODO better font and paddings
         // TODO Background if searching in the past
 

@@ -16,14 +16,6 @@ Implementing features useful for bohurt into a android app
 * Page to vote for next features for v2
 * Share the app button and link to store for voting
 
-Expected release date:
-* alpha: 20 April 2017, before BOTN
-* open beta: 25 Mai 2017, before IMCF 2017
-* store: release when ready
-
-
-### How to use
-
 
 ### Coding
 
@@ -31,10 +23,14 @@ To set-up the environment to build, you need:
 
 A googleMap apiKey
 * Create a file app/res/google_maps_api.xml
-* Get you api key here:
-* fill teh data :
+* Get you api key here: https://developers.google.com/maps/documentation/android-api/signup
+* fill it with your content:
 ```
-TODO Code hre
+<resources>
+    <string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">
+        YOUR_API_KEY
+    </string>
+</resources>
 ```
 
 
