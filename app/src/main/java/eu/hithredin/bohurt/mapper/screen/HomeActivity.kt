@@ -68,7 +68,7 @@ class HomeActivity : BaseActivity() {
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(europe))
         googleMap.setOnMarkerClickListener({ marker ->
             val event: EventData = marker.tag as EventData
-            // Enable details feature when ready
+            // Enable details feature when function is ready
             //EventActivity.startActivity(this, event)
             false
         })
@@ -98,6 +98,7 @@ class HomeActivity : BaseActivity() {
                                     .icon(iconTourney)
                                     .title(event.event_name))
                             marker.tag = event
+                            //TODO Clustering according to Zoom Level
                         }
             }, {
                 Toast.makeText(this, "Loading end with error", Toast.LENGTH_SHORT).show()

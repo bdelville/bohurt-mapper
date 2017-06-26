@@ -23,10 +23,7 @@ android {
 
 dependencies {
     compile project(':ktopendatasoft')
-    compile ("com.github.bdelville:easingdate-ranger:0.0.2") {
-        exclude group: 'com.android.support', module:'support-v4'
-        exclude group: 'com.android.support', module:'appcompat-v7'
-    }
+    compile project(':easingdaterange')
 
     compile "com.android.support:support-v4:$support_version"
     compile "com.android.support:appcompat-v7:$support_version"
