@@ -43,10 +43,10 @@
     </style>
 
     <style name="FormTitle" parent="TextAppearance.AppCompat.Medium">
-        <item name="android:textColor">@color/smallTitleColor</item>
+        <item name="android:textColor">@color/mainColorTitle</item>
     </style>
     <style name="FormSubTitle" parent="TextAppearance.AppCompat.Subhead">
-        <item name="android:textColor">@color/smallTitleColor</item>
+        <item name="android:textColor">@color/mainColorTitle</item>
     </style>
 
     <style name="ErrorText" parent="TextAppearance.AppCompat.Medium">

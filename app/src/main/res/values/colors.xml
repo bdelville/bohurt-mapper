@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#303F9F</color>
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#ae0101</color>
+    <color name="colorMainBg">#ffcecece</color>
 
-    <color name="bg_text_transparent">#6e000000</color>
     <color name="bg_btn_image_pressed">#ffcecece</color>
     <color name="white_pressed">#ffcecece</color>
 
-    <color name="smallTitleColor">#039487</color>
-
-    <color name="mainColorText">#ffffffff</color>
-    <color name="mainColor">#ff0099cc</color>
-    <color name="mainColorLight">#ffaaddff</color>
-    <color name="mainColor_pressed">#ffE3F2FD</color>
-    <color name="buttonNegative">#ffff4444</color>
-    <color name="buttonNegative_pressed">#ffFFCDD2</color>
+    <color name="mainColorText">#000000</color>
+    <color name="mainColorTitle">#000000</color>
+    <color name="mainColorLight">#4e4e4e</color>
+    <color name="mainColor_pressed">#ff2e2e2e</color>
 
     <color name="selected">#ffCDFFD2</color>
     <color name="unselected">#ffFFCDD2</color>

@@ -15,9 +15,12 @@ import eu.hithredin.easingdate.DateRangeChangeListener
 import eu.hithredin.easingdate.HOUR
 import eu.hithredin.easingdate.TimeMode
 import eu.hithredin.ktopendatasoft.ApiLoader
+import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_home.*
 import mu.KotlinLogging
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 val DAY: Long = HOUR * 24
 val YEAR: Long = DAY * 355
@@ -36,7 +39,7 @@ class HomeActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         setTitle(R.string.event_home_title_page)
-        iconTourney = BitmapDescriptorFactory.fromResource(R.drawable.map_icon_tourney)
+        iconTourney = BitmapDescriptorFactory.fromResource(R.drawable.map_icon_tourney_dark)
 
         val now = System.currentTimeMillis()
         search_date_picker.minDate = now - (1 * DAY)
@@ -56,7 +59,6 @@ class HomeActivity : BaseActivity() {
             }
         })*/
 
-        // TODO Background switching color if searching in the past
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this::mapReady)
     }
@@ -76,7 +78,12 @@ class HomeActivity : BaseActivity() {
         googleMap.uiSettings.isZoomControlsEnabled = true
         googleMap.uiSettings.isTiltGesturesEnabled = false
         this.googleMap = googleMap
-        loadData()
+
+        Single.just(0).delay(1, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        { _ -> loadData() },
+                        { e -> logger.error { "Result query:\n$e" } })
     }
 
     fun loadData() {
