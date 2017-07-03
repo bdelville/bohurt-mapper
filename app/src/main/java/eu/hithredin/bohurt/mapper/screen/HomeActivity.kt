@@ -1,6 +1,8 @@
 package eu.hithredin.bohurt.mapper.screen
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.Toast
 import com.github.salomonbrys.kodein.instance
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -17,6 +19,8 @@ import eu.hithredin.easingdate.TimeMode
 import eu.hithredin.ktopendatasoft.ApiLoader
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.activity_home.*
 import mu.KotlinLogging
 import java.util.*
@@ -34,6 +38,8 @@ class HomeActivity : BaseActivity() {
     private val logger = KotlinLogging.logger {}
     val apiLoader: ApiLoader<EventData> by injector.instance()
     private lateinit var iconTourney: BitmapDescriptor
+    private val observeLoad = PublishSubject.create<Boolean>()
+    private val disposables = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,19 +54,39 @@ class HomeActivity : BaseActivity() {
         search_date_picker.dateChangeSet = object : DateRangeChangeListener {
             override fun onDateChanged(lowerDate: Long, upperDate: Long) {
                 Toast.makeText(this@HomeActivity, "Loading the data", Toast.LENGTH_SHORT).show()
-                loadData()
+                observeLoad.onNext(true)
             }
         }
 
-        // TODO Search by text too (OR)
-        /*search_query.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                s.toString()
+        search_query.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
-        })*/
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                observeLoad.onNext(true)
+            }
+        })
 
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this::mapReady)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        disposables.add(
+                observeLoad.throttleLast(3, TimeUnit.SECONDS)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                { _ -> loadData() },
+                                { e -> logger.error { "observeLoad:\n$e" } }))
+    }
+
+    override fun onPause() {
+        super.onPause()
+        disposables.clear()
     }
 
     fun mapReady(googleMap: GoogleMap) {
@@ -82,15 +108,17 @@ class HomeActivity : BaseActivity() {
         Single.just(0).delay(1, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        { _ -> loadData() },
-                        { e -> logger.error { "Result query:\n$e" } })
+                        { _ -> observeLoad.onNext(true) },
+                        { e -> logger.error { "Single:\n$e" } })
     }
 
     fun loadData() {
+        //TODO seems it uses cache when not cached
         googleMap.clear()
         val query = EventQuery()
                 .dateStart(Date(search_date_picker.lowerDate))
                 .dateEnd(Date(search_date_picker.upperDate))
+                //TODO Manage search query .searchText(search_query.text.toString())
 
         apiLoader.queryList(query) { req, res, result ->
             result.fold({

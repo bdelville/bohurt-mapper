@@ -25,4 +25,9 @@ class EventQuery : ApiQuery(dataSetEvents) {
         andsQ.add("date <= " + dateToString(lastDate))
         return this
     }
+
+    fun searchText(query: String): EventQuery {
+        andsQ.add("q=" + query)
+        return this
+    }
 }
