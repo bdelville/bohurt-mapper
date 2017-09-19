@@ -11,6 +11,7 @@ import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
 import android.view.animation.AccelerateInterpolator
+import io.reactivex.subjects.BehaviorSubject
 import java.util.*
 
 interface RangeSliderListener {
@@ -24,7 +25,7 @@ interface RangeSliderListener {
 /**
  * Slider following Material Design with two movable targets that allow user to select a range of integers.
  *
- * Convertion from https://github.com/twotoasters/MaterialRangeSlider
+ * Convertion to Kotlin from https://github.com/twotoasters/MaterialRangeSlider
  */
 class MaterialRangeSlider : View {
 
@@ -350,17 +351,24 @@ class MaterialRangeSlider : View {
 
     var selectedMinPrevious: Int = -1
     var selectedMaxPrevious: Int = -1
+    val valuesSubject: BehaviorSubject<Pair<Int, Int>> = BehaviorSubject.create()
+
+    fun observeChange() : io.reactivex.Observable<Pair<Int, Int>> {
+        return valuesSubject
+    }
 
     private fun callMinChangedCallbacks() {
         if(selectedMinPrevious == selectedMin) return
         selectedMinPrevious = selectedMin
         rangeSliderListener?.onLowerChanged(selectedMin)
+        valuesSubject.onNext(Pair(selectedMin, selectedMax))
     }
 
     private fun callMaxChangedCallbacks() {
         if(selectedMaxPrevious == selectedMax) return
         selectedMaxPrevious = selectedMax
         rangeSliderListener?.onUpperChanged(selectedMax)
+        valuesSubject.onNext(Pair(selectedMin, selectedMax))
     }
 
     private fun isTouchingMinTarget(pointerIndex: Int, event: MotionEvent): Boolean {

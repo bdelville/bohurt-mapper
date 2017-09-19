@@ -10,7 +10,7 @@ import eu.hithredin.bohurt.mapper.R
 import eu.hithredin.bohurt.mapper.framework.BaseLoadFragment
 
 /**
- * Functionnal Fragment based on a RecyclerView
+ * Functional Fragment based on a RecyclerView
  * Help to query data, used the RecyclerView, Manage error/reload
  */
 abstract class BaseRecyclerFragment<T> : BaseLoadFragment() {
@@ -42,7 +42,6 @@ abstract class BaseRecyclerFragment<T> : BaseLoadFragment() {
 
     /**
      * Override for a specific adapter
-     * @return
      */
     protected fun buildAdapter(): RecyclerAdapter<T> {
         return RecyclerAdapter()
@@ -65,7 +64,6 @@ abstract class BaseRecyclerFragment<T> : BaseLoadFragment() {
 
     /**
      * Override to force a LayoutManager for the recyclerView
-
      */
     protected fun buildRecyclerLayoutManager(): RecyclerView.LayoutManager {
         return LinearLayoutManager(activity)

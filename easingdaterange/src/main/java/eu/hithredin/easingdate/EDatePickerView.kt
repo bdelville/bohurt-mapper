@@ -33,7 +33,7 @@ interface DateRangeChangeListener {
 }
 
 /**
- * INSERT DOC
+ * Select a range of date by with a customizable precision of the date slider
  */
 class EDatePickerView : RelativeLayout, RangeSliderListener {
     lateinit var textMinDate: TextView
@@ -91,19 +91,29 @@ class EDatePickerView : RelativeLayout, RangeSliderListener {
         rangeSlider = findViewById(R.id.range_slider) as MaterialRangeSlider
         rangeSlider.rangeSliderListener = this
 
-        // TODO Improve Text Style using Material design
+        /*rangeSlider.observeChange()
+                .throttleLast(200, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    dates ->
+                    upperDate = toDate(dates.second)
+                    lowerDate = toDate(dates.first)
+                    textMaxDate.text = toDateString(upperDate)
+                    textMinDate.text = toDateString(lowerDate)
+                    dateChanged?.onDateChanged(lowerDate, upperDate)
+                }, { e -> e.printStackTrace() })*/
     }
 
     override fun onUpperChanged(newValue: Int) {
         upperDate = toDate(newValue)
         textMaxDate.text = toDateString(upperDate)
-        dateChanged?.onDateChanged(lowerDate, upperDate)
+        //dateChanged?.onDateChanged(lowerDate, upperDate)
     }
 
     override fun onLowerChanged(newValue: Int) {
         lowerDate = toDate(newValue)
         textMinDate.text = toDateString(lowerDate)
-        dateChanged?.onDateChanged(lowerDate, upperDate)
+        //dateChanged?.onDateChanged(lowerDate, upperDate)
     }
 
     /**

@@ -9,7 +9,7 @@ import eu.hithredin.bohurt.mapper.modules.event.EventData
 import eu.hithredin.ktopendatasoft.ApiLoader
 
 /**
- * Declare OpenDataSoft modules here, to be injected in Application
+ * Declare Libraries (OpenDataSoft) modules here, to be injected in Application
  */
 val libModule = Kodein.Module {
     bind<ApiLoader<EventData>>() with singleton {

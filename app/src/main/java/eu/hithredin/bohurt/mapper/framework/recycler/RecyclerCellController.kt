@@ -8,7 +8,6 @@ import android.view.View
 abstract class RecyclerCellController<T> {
 
     /**
-
      * @param holderType
      * *
      * @return the id of the layout for this type
