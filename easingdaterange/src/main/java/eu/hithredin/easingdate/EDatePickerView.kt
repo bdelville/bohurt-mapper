@@ -5,9 +5,11 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import android.widget.TextView
+import io.reactivex.android.schedulers.AndroidSchedulers
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 /**
  * Easing of the date selector
@@ -91,7 +93,7 @@ class EDatePickerView : RelativeLayout, RangeSliderListener {
         rangeSlider = findViewById(R.id.range_slider) as MaterialRangeSlider
         rangeSlider.rangeSliderListener = this
 
-        /*rangeSlider.observeChange()
+        rangeSlider.observeChange()
                 .throttleLast(200, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
@@ -101,18 +103,16 @@ class EDatePickerView : RelativeLayout, RangeSliderListener {
                     textMaxDate.text = toDateString(upperDate)
                     textMinDate.text = toDateString(lowerDate)
                     dateChanged?.onDateChanged(lowerDate, upperDate)
-                }, { e -> e.printStackTrace() })*/
+                }, { e -> e.printStackTrace() })
     }
 
     override fun onUpperChanged(newValue: Int) {
-        upperDate = toDate(newValue)
-        textMaxDate.text = toDateString(upperDate)
+        //upperDate = toDate(newValue)
         //dateChanged?.onDateChanged(lowerDate, upperDate)
     }
 
     override fun onLowerChanged(newValue: Int) {
-        lowerDate = toDate(newValue)
-        textMinDate.text = toDateString(lowerDate)
+        //lowerDate = toDate(newValue)
         //dateChanged?.onDateChanged(lowerDate, upperDate)
     }
 
