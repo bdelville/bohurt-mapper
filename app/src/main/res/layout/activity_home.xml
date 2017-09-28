@@ -7,18 +7,6 @@
     android:background="@color/colorMainBg"
     tools:context="eu.hithredin.bohurt.mapper.screen.HomeActivity">
 
-    <EditText
-        android:id="@+id/search_query"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dip"
-        android:layout_marginRight="10dip"
-        android:layout_marginTop="10dip"
-        android:hint="@string/search_query_hint"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/title_date"
         style="@style/TextTitle"
@@ -28,15 +16,19 @@
         android:layout_marginRight="10dip"
         android:layout_marginTop="10dip"
         android:text="@string/search_date_title"
-        app:layout_constraintTop_toBottomOf="@id/search_query" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <eu.hithredin.easingdate.EDatePickerView
-        android:id="@+id/search_date_picker"
+    <com.github.badoualy.datepicker.DatePickerTimeline
+        android:id="@+id/datepicker_start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.github.badoualy.datepicker.DatePickerTimeline
+        android:id="@+id/datepicker_end"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dip"
-        android:layout_marginRight="10dip"
-        app:layout_constraintTop_toBottomOf="@id/title_date" />
+        app:layout_constraintTop_toBottomOf="@id/datepicker_start" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -44,7 +36,7 @@
         android:layout_marginBottom="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_date_picker">
+        app:layout_constraintTop_toBottomOf="@id/datepicker_end">
 
         <fragment
             android:id="@+id/map"

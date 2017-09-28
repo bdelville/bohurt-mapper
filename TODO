@@ -4,9 +4,9 @@
 
 // Refactorisation
 1°) Remove this crappy date range slider and use a real date picker
-- https://github.com/badoualy/datepicker-timeline?utm_source=android-arsenal.com&utm_medium=referral&utm_campaign=5965
-- https://github.com/MedAmineTazarki/DateRangePicker/blob/master/app/src/main/java/com/matdroid/daterangepicker/fragments/DateRangePickerFragment.java?utm_source=android-arsenal.com&utm_medium=referral&utm_campaign=4752
-- https://github.com/tittojose/TimeRangePicker?utm_source=android-arsenal.com&utm_medium=referral&utm_campaign=4752
+- https://github.com/badoualy/datepicker-timeline
+- https://github.com/MedAmineTazarki/DateRangePicker/blob/master/app/src/main/java/com/matdroid/daterangepicker/fragments/DateRangePickerFragment.java
+- https://github.com/tittojose/TimeRangePicker
 
 2°) Use latest version android studio, Kotlin, and Clean Gson/Kotlin (null parse) and Rx
 

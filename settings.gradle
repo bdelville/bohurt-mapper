@@ -1,1 +1,1 @@
-include ':app', ':ktopendatasoft', ':easingdaterange'
+include ':app', ':ktopendatasoft'

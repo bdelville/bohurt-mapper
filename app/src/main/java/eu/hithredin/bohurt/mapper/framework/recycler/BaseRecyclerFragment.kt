@@ -27,8 +27,7 @@ abstract class BaseRecyclerFragment<T> : BaseLoadFragment() {
 
     override fun assignViews(root: View) {
         super.assignViews(root)
-
-        recyclerView = root.findViewById(R.id.recyclerview) as RecyclerView
+        recyclerView = root.findViewById(R.id.recyclerview)
     }
 
     override fun populateViews(savedInstanceState: Bundle?) {

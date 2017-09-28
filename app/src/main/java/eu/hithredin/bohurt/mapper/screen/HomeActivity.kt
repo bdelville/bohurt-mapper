@@ -1,9 +1,8 @@
 package eu.hithredin.bohurt.mapper.screen
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.widget.Toast
+import com.github.badoualy.datepicker.DatePickerTimeline
 import com.github.salomonbrys.kodein.instance
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -13,33 +12,30 @@ import eu.hithredin.bohurt.mapper.R
 import eu.hithredin.bohurt.mapper.framework.BaseActivity
 import eu.hithredin.bohurt.mapper.modules.event.EventData
 import eu.hithredin.bohurt.mapper.modules.event.EventQuery
-import eu.hithredin.easingdate.DateRangeChangeListener
-import eu.hithredin.easingdate.HOUR
-import eu.hithredin.easingdate.TimeMode
+import eu.hithredin.bohurt.mapper.utils.selectedDate
 import eu.hithredin.ktopendatasoft.ApiLoader
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.PublishSubject
-import kotlinx.android.synthetic.main.activity_home.*
 import mu.KotlinLogging
 import java.util.*
 import java.util.concurrent.TimeUnit
-
-val DAY: Long = HOUR * 24
-val YEAR: Long = DAY * 355
 
 /**
  * Main screen of the application.
  * Will be refactored when the app evolve.
  */
 class HomeActivity : BaseActivity() {
-    private lateinit var googleMap: GoogleMap
     private val logger = KotlinLogging.logger {}
     val apiLoader: ApiLoader<EventData> by injector.instance()
-    private lateinit var iconTourney: BitmapDescriptor
     private val observeLoad = PublishSubject.create<Boolean>()
     private val disposables = CompositeDisposable()
+
+    private lateinit var iconTourney: BitmapDescriptor
+    private lateinit var datePickerStart: DatePickerTimeline
+    private lateinit var datePickerEnd: DatePickerTimeline
+    private lateinit var googleMap: GoogleMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,28 +43,28 @@ class HomeActivity : BaseActivity() {
         setTitle(R.string.event_home_title_page)
         iconTourney = BitmapDescriptorFactory.fromResource(R.drawable.map_icon_tourney_dark)
 
-        val now = System.currentTimeMillis()
-        search_date_picker.minDate = now - (1 * DAY)
-        search_date_picker.maxDate = now + YEAR
-        search_date_picker.mode = TimeMode.CUBIC
-        search_date_picker.dateChangeSet = object : DateRangeChangeListener {
-            override fun onDateChanged(lowerDate: Long, upperDate: Long) {
-                Toast.makeText(this@HomeActivity, "Loading the data", Toast.LENGTH_SHORT).show()
+        // Load views
+        datePickerStart = findViewById(R.id.datepicker_start)
+        datePickerEnd = findViewById(R.id.datepicker_end)
+
+        datePickerStart.onDateSelectedListener = object : DatePickerTimeline.OnDateSelectedListener {
+            override fun onDateSelected(year: Int, month: Int, day: Int, index: Int) {
                 observeLoad.onNext(true)
             }
         }
+        datePickerEnd.onDateSelectedListener = DatePickerTimeline.OnDateSelectedListener { year, month, day, index ->
+            observeLoad.onNext(true)
+            //TODO Check date to auto change the other one
+        }
 
-        search_query.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
+        val now = Calendar.getInstance()
+        datePickerStart.setFirstVisibleDate(now.get(Calendar.YEAR) - 1, Calendar.JANUARY, 1)
+        datePickerEnd.setFirstVisibleDate(now.get(Calendar.YEAR) - 1, Calendar.JANUARY, 1)
+        datePickerStart.setLastVisibleDate(now.get(Calendar.YEAR) + 2, Calendar.JANUARY, 1)
+        datePickerEnd.setLastVisibleDate(now.get(Calendar.YEAR) + 2, Calendar.JANUARY, 1)
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                observeLoad.onNext(true)
-            }
-        })
+        datePickerStart.setSelectedDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH))
+        datePickerEnd.setSelectedDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH))
 
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this::mapReady)
@@ -116,9 +112,9 @@ class HomeActivity : BaseActivity() {
         //TODO seems it uses cache when not cached
         googleMap.clear()
         val query = EventQuery()
-                .dateStart(Date(search_date_picker.lowerDate))
-                .dateEnd(Date(search_date_picker.upperDate))
-                //TODO Manage search query .searchText(search_query.text.toString())
+                .dateStart(datePickerStart.selectedDate())
+                .dateEnd(datePickerEnd.selectedDate())
+        //TODO Manage search query .searchText(search_query.text.toString())
 
         apiLoader.queryList(query) { req, res, result ->
             result.fold({

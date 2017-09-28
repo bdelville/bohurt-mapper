@@ -58,15 +58,11 @@ abstract class BaseLoadFragment : BaseFragment() {
     }
 
     override fun assignViews(root: View) {
-        val loader = root.findViewById(R.id.info_load_indicator)
-        if (loader is ProgressBar) {
-            spinnerCenterLoading = loader
-        }
-
+        spinnerCenterLoading = root.findViewById(R.id.info_load_indicator)
         errorReloadAction = root.findViewById(R.id.info_reload)
-        errorReloadText = root.findViewById(R.id.info_reload_text) as TextView
-        errorTitle = root.findViewById(R.id.info_title) as TextView
-        errorText = root.findViewById(R.id.info_text) as TextView
+        errorReloadText = root.findViewById(R.id.info_reload_text)
+        errorTitle = root.findViewById(R.id.info_title)
+        errorText = root.findViewById(R.id.info_text)
     }
 
     override fun populateViews(savedInstanceState: Bundle?) {

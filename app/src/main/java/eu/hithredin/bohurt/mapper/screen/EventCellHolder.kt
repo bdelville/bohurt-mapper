@@ -18,7 +18,7 @@ class EventCellHolder(itemView: View) : ReCellHolder<EventData>(itemView) {
     }
 
     override fun buildHolder(view: View) {
-        titleView = view.findViewById(R.id.title_view) as TextView?
+        titleView = view.findViewById(R.id.title_view)
     }
 
     override fun fillCell() {
