@@ -132,7 +132,8 @@ class HomeActivity : BaseActivity() {
         val query = EventQuery()
                 .dateStart(datePickerStart.selectedDate())
                 .dateEnd(datePickerEnd.selectedDate())
-        //TODO Manage search query .searchText(search_query.text.toString())
+        //TODO Rx queries and process
+        //TODO Open details event
 
         apiLoader.queryList(query) { req, res, result ->
             result.fold({

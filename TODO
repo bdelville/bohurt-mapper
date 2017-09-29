@@ -1,31 +1,22 @@
-* Load data from SDK : OK
-* Map basic: OK
-* cache queries and pagination : OK
+Clean the code
+* Rxify the queries and all data communication: No callback
+* Clean all model parsing Json with kotlin nullable
+* Introduce MVP
 
-// Refactorisation
-1°) Remove this crappy date range slider and use a real date picker
-- https://github.com/badoualy/datepicker-timeline
-- https://github.com/MedAmineTazarki/DateRangePicker/blob/master/app/src/main/java/com/matdroid/daterangepicker/fragments/DateRangePickerFragment.java
-- https://github.com/tittojose/TimeRangePicker
-
-2°) Use latest version android studio, Kotlin, and Clean Gson/Kotlin (null parse) and Rx
-
-3°) Rxify the queries and all data communication: No callback
-
-* Query: remove filter by search string: just date
+Minimum new Features
 * Map - selector, custom popup
 * Map - OpenDataSoft Map linked to QueryLoader with clusterisation and MapAdapter with rx
 * Extract ODS Map & queries into an Android library
 * Detail page of event
-
 * Add event to android calendar app
-* Form to register a tourney
-* UnitTest the library
+
+Make it maintanable and co-developer friendly
 * Configure checkstyles, lint
-
-* Form to give feedback / vote for next features
-* Button 'I am going', registered somewhere to share to other
-
-
+* Unit-Test the library
 * CLI build with docker (wercker, ship)
 * Configure apiKey not in git (googleMaps, SigningKey)
+
+New Features v2
+* Form to register a tourney
+* Form to give feedback / vote for next features
+* Button 'I am going', registered somewhere to share to other
