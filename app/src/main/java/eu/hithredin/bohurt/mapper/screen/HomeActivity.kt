@@ -1,6 +1,8 @@
 package eu.hithredin.bohurt.mapper.screen
 
 import android.os.Bundle
+import android.support.v4.widget.ContentLoadingProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import com.github.badoualy.datepicker.DatePickerTimeline
 import com.github.salomonbrys.kodein.instance
@@ -25,6 +27,8 @@ import java.util.concurrent.TimeUnit
 /**
  * Main screen of the application.
  * Will be refactored when the app evolve.
+ *
+ * TODO PR the library to disable the day subtitle and customize the color
  */
 class HomeActivity : BaseActivity() {
     private val logger = KotlinLogging.logger {}
@@ -37,6 +41,10 @@ class HomeActivity : BaseActivity() {
     private lateinit var datePickerEnd: DatePickerTimeline
     private lateinit var googleMap: GoogleMap
 
+    private lateinit var titleStart: TextView
+    private lateinit var titleEnd: TextView
+    private lateinit var spinner: ContentLoadingProgressBar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -46,25 +54,34 @@ class HomeActivity : BaseActivity() {
         // Load views
         datePickerStart = findViewById(R.id.datepicker_start)
         datePickerEnd = findViewById(R.id.datepicker_end)
+        titleStart = findViewById(R.id.title_date_start)
+        titleEnd = findViewById(R.id.title_date_end)
+        spinner = findViewById(R.id.loader_map)
 
         datePickerStart.onDateSelectedListener = object : DatePickerTimeline.OnDateSelectedListener {
             override fun onDateSelected(year: Int, month: Int, day: Int, index: Int) {
+                if (datePickerStart.selectedDate().after(datePickerEnd.selectedDate())) {
+                    datePickerEnd.setSelectedDate(datePickerStart.selectedYear, datePickerStart.selectedMonth, datePickerStart.selectedDay)
+                }
+                titleStart.text = getString(R.string.search_date_title_start, datePickerStart.selectedYear.toString())
                 observeLoad.onNext(true)
             }
         }
         datePickerEnd.onDateSelectedListener = DatePickerTimeline.OnDateSelectedListener { year, month, day, index ->
+            if (datePickerStart.selectedDate().after(datePickerEnd.selectedDate())) {
+                datePickerStart.setSelectedDate(datePickerEnd.selectedYear, datePickerEnd.selectedMonth, datePickerEnd.selectedDay)
+            }
+            titleEnd.text = getString(R.string.search_date_title_end, datePickerEnd.selectedYear.toString())
             observeLoad.onNext(true)
-            //TODO Check date to auto change the other one
         }
 
         val now = Calendar.getInstance()
-        datePickerStart.setFirstVisibleDate(now.get(Calendar.YEAR) - 1, Calendar.JANUARY, 1)
-        datePickerEnd.setFirstVisibleDate(now.get(Calendar.YEAR) - 1, Calendar.JANUARY, 1)
         datePickerStart.setLastVisibleDate(now.get(Calendar.YEAR) + 2, Calendar.JANUARY, 1)
         datePickerEnd.setLastVisibleDate(now.get(Calendar.YEAR) + 2, Calendar.JANUARY, 1)
 
-        datePickerStart.setSelectedDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH))
-        datePickerEnd.setSelectedDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH))
+        datePickerStart.setSelectedDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH) - 1)
+        datePickerEnd.setSelectedDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 3, now.get(Calendar.DAY_OF_MONTH))
+        datePickerEnd.setFirstVisibleDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 3, now.get(Calendar.DAY_OF_MONTH))
 
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this::mapReady)
@@ -94,7 +111,7 @@ class HomeActivity : BaseActivity() {
             val event: EventData = marker.tag as EventData
             // Enable details feature when function is ready
             //EventActivity.startActivity(this, event)
-            false
+            true
         })
 
         googleMap.uiSettings.isZoomControlsEnabled = true
@@ -110,6 +127,7 @@ class HomeActivity : BaseActivity() {
 
     fun loadData() {
         //TODO seems it uses cache when not cached
+        spinner.show()
         googleMap.clear()
         val query = EventQuery()
                 .dateStart(datePickerStart.selectedDate())
@@ -119,7 +137,7 @@ class HomeActivity : BaseActivity() {
         apiLoader.queryList(query) { req, res, result ->
             result.fold({
                 logger.info { "Result query:\n$it" }
-
+                spinner.hide()
                 it.data()
                         ?.filter { event -> event.isValid() }
                         ?.forEach { event ->
@@ -134,6 +152,7 @@ class HomeActivity : BaseActivity() {
             }, {
                 Toast.makeText(this, "Loading end with error", Toast.LENGTH_SHORT).show()
                 logger.error { "Result query:\n$it" }
+                spinner.hide()
             })
         }
     }
