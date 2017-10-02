@@ -1,4 +1,4 @@
-package eu.hithredin.bohurt.mapper.framework.recycler
+package eu.hithredin.bohurt.mapper.view.framework.recycler
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import eu.hithredin.bohurt.mapper.R
-import eu.hithredin.bohurt.mapper.framework.BaseLoadFragment
+import eu.hithredin.bohurt.mapper.view.framework.BaseLoadFragment
 
 /**
  * Functional Fragment based on a RecyclerView

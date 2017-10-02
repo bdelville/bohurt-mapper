@@ -1,4 +1,4 @@
-package eu.hithredin.bohurt.mapper.framework.recycler
+package eu.hithredin.bohurt.mapper.view.framework.recycler
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater

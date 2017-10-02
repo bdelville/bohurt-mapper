@@ -1,4 +1,4 @@
-package eu.hithredin.bohurt.mapper.framework
+package eu.hithredin.bohurt.mapper.view.framework
 
 import android.os.Bundle
 import android.support.v4.app.Fragment

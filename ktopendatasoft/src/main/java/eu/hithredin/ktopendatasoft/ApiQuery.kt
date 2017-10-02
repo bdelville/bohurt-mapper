@@ -31,7 +31,7 @@ open class ApiQuery(val dataset: String) {
         params.put("sort", if(ascending) "+" else "-" + fieldName)
     }
 
-    fun inCircle(lat: Double, lon: Double, meters: Int = 5000){
+    fun insideLocation(lat: Double, lon: Double, meters: Int = 5000){
         andsQ.add("geofilter.distance=$lat,$lon,$meters")
     }
 

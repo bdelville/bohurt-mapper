@@ -1,12 +1,13 @@
-package eu.hithredin.bohurt.mapper.screen
+package eu.hithredin.bohurt.mapper.view.fragment
 
 import android.view.View
 import eu.hithredin.bohurt.mapper.R
 import eu.hithredin.bohurt.mapper.app.DATA_KEY
-import eu.hithredin.bohurt.mapper.framework.recycler.BaseRecyclerFragment
-import eu.hithredin.bohurt.mapper.framework.recycler.ReCellHolder
-import eu.hithredin.bohurt.mapper.framework.recycler.RecyclerCellController
-import eu.hithredin.bohurt.mapper.modules.event.EventData
+import eu.hithredin.bohurt.mapper.view.framework.recycler.BaseRecyclerFragment
+import eu.hithredin.bohurt.mapper.view.framework.recycler.ReCellHolder
+import eu.hithredin.bohurt.mapper.view.framework.recycler.RecyclerCellController
+import eu.hithredin.bohurt.mapper.model.event.EventData
+import eu.hithredin.bohurt.mapper.view.cellholder.EventCellHolder
 
 /**
  * UI for the content of a Event

@@ -1,4 +1,4 @@
-package eu.hithredin.bohurt.mapper.modules.event
+package eu.hithredin.bohurt.mapper.model.event
 
 import eu.hithredin.ktopendatasoft.ApiQuery
 import java.util.*

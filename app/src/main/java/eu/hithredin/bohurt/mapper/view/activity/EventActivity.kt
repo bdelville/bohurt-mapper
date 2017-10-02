@@ -1,12 +1,13 @@
-package eu.hithredin.bohurt.mapper.screen
+package eu.hithredin.bohurt.mapper.view.activity
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import eu.hithredin.bohurt.mapper.R
 import eu.hithredin.bohurt.mapper.app.DATA_KEY
-import eu.hithredin.bohurt.mapper.framework.BaseActivity
-import eu.hithredin.bohurt.mapper.modules.event.EventData
+import eu.hithredin.bohurt.mapper.view.framework.BaseActivity
+import eu.hithredin.bohurt.mapper.model.event.EventData
+import eu.hithredin.bohurt.mapper.view.fragment.EventFragment
 
 /**
  * Details page of the Event

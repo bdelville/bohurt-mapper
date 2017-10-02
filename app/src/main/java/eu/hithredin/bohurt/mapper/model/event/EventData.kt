@@ -1,4 +1,4 @@
-package eu.hithredin.bohurt.mapper.modules.event
+package eu.hithredin.bohurt.mapper.model.event
 
 import com.github.kittinunf.fuel.core.ResponseDeserializable
 import com.github.salomonbrys.kotson.fromJson
