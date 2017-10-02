@@ -5,9 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import eu.hithredin.bohurt.mapper.R
 import eu.hithredin.bohurt.mapper.app.DATA_KEY
-import eu.hithredin.bohurt.mapper.view.framework.BaseActivity
 import eu.hithredin.bohurt.mapper.model.event.EventData
 import eu.hithredin.bohurt.mapper.view.fragment.EventFragment
+import eu.hithredin.bohurt.mapper.view.framework.BaseActivity
 
 /**
  * Details page of the Event
@@ -26,7 +26,6 @@ class EventActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base_fragment)
 
-        val fragment = EventFragment()
-        setFragment(fragment)
+        setFragment(EventFragment.startFragment(intent.extras))
     }
 }

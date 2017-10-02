@@ -1,17 +1,16 @@
-Clean the code
-* Rxify the queries and all data communication: No callback
-* Clean all model parsing Json with kotlin nullable
-* Introduce MVP
+
 
 Minimum new Features
-* Map - selector, custom popup
-* Map - OpenDataSoft Map linked to QueryLoader with clusterisation and MapAdapter with rx
-* Extract ODS Map & queries into an Android library
 * Detail page of event
+* Bottom Sheet on top of the list VS List/details on big screens
+* Map - selector, custom popup
+* Map - OpenDataSoft Map linked to QueryLoader with clusterisation and MapAdapter
+* Extract ODS Map & queries into an Android library
 * Add event to android calendar app
 
-Make it maintanable and co-developer friendly
+Make it maintainable and co-developer friendly
 * Configure checkstyles, lint
+* Introduce MVP
 * Unit-Test the library
 * CLI build with docker (wercker, ship)
 * Configure apiKey not in git (googleMaps, SigningKey)
