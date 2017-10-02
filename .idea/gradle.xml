@@ -9,7 +9,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/easingdaterange" />
             <option value="$PROJECT_DIR$/ktopendatasoft" />
           </set>
         </option>

@@ -3,14 +3,14 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
     defaultConfig {
         applicationId "eu.hithredin.bohurt.mapper"
         minSdkVersion 16
-        targetSdkVersion 25
-        versionCode 2
-        versionName "0.0.2"
+        targetSdkVersion 26
+        versionCode 3
+        versionName "0.0.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -23,7 +23,6 @@ android {
 
 dependencies {
     compile project(':ktopendatasoft')
-    compile project(':easingdaterange')
 
     compile "com.android.support:support-v4:$support_version"
     compile "com.android.support:appcompat-v7:$support_version"
@@ -32,11 +31,12 @@ dependencies {
     compile "com.android.support:design:$support_version"
     compile "com.android.support.constraint:constraint-layout:$constraint_version"
 
+    compile 'com.github.badoualy:datepicker-timeline:c6dcd05737'
+
     compile "io.github.microutils:kotlin-logging:$kotlin_logging_version"
     compile group: 'org.slf4j', name: 'slf4j-android', version: "$slf4j_android_version"
     compile "com.github.salomonbrys.kodein:kodein:$kodein_version"
 
-    compile "com.github.kittinunf.fuel:fuel-android:$fuel_android_version"
     compile "com.google.android.gms:play-services-maps:$play_services_maps_version"
 
     debugCompile "com.squareup.leakcanary:leakcanary-android:$leakcanary_version"
@@ -50,4 +50,5 @@ dependencies {
 }
 repositories {
     mavenCentral()
+    maven { url "https://jitpack.io" }
 }

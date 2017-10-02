@@ -1,31 +1,21 @@
-* Load data from SDK : OK
-* Map basic: OK
-* cache queries and pagination : OK
 
-// Refactorisation
-1°) Remove this crappy date range slider and use a real date picker
-- https://github.com/badoualy/datepicker-timeline?utm_source=android-arsenal.com&utm_medium=referral&utm_campaign=5965
-- https://github.com/MedAmineTazarki/DateRangePicker/blob/master/app/src/main/java/com/matdroid/daterangepicker/fragments/DateRangePickerFragment.java?utm_source=android-arsenal.com&utm_medium=referral&utm_campaign=4752
-- https://github.com/tittojose/TimeRangePicker?utm_source=android-arsenal.com&utm_medium=referral&utm_campaign=4752
 
-2°) Use latest version android studio, Kotlin, and Clean Gson/Kotlin (null parse) and Rx
-
-3°) Rxify the queries and all data communication: No callback
-
-* Query: remove filter by search string: just date
-* Map - selector, custom popup
-* Map - OpenDataSoft Map linked to QueryLoader with clusterisation and MapAdapter with rx
-* Extract ODS Map & queries into an Android library
+Minimum new Features
 * Detail page of event
-
+* Bottom Sheet on top of the list VS List/details on big screens
+* Map - selector, custom popup
+* Map - OpenDataSoft Map linked to QueryLoader with clusterisation and MapAdapter
+* Extract ODS Map & queries into an Android library
 * Add event to android calendar app
-* Form to register a tourney
-* UnitTest the library
+
+Make it maintainable and co-developer friendly
 * Configure checkstyles, lint
-
-* Form to give feedback / vote for next features
-* Button 'I am going', registered somewhere to share to other
-
-
+* Introduce MVP
+* Unit-Test the library
 * CLI build with docker (wercker, ship)
 * Configure apiKey not in git (googleMaps, SigningKey)
+
+New Features v2
+* Form to register a tourney
+* Form to give feedback / vote for next features
+* Button 'I am going', registered somewhere to share to other

@@ -5,7 +5,7 @@ import com.github.kittinunf.fuse.core.Fuse
 import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.singleton
-import eu.hithredin.bohurt.mapper.modules.event.EventData
+import eu.hithredin.bohurt.mapper.model.event.EventData
 import eu.hithredin.ktopendatasoft.ApiLoader
 
 /**

@@ -1,23 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <TextView
+        android:id="@+id/text_name"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        style="TextAppearance.AppCompat.Title"
+        tools:text="hi you"/>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:paddingBottom="10dip" />
+    <TextView
+        android:id="@+id/text_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-        <include layout="@layout/utils_list_load" />
+    <TextView
+        android:id="@+id/text_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/text_country"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
+    <TextView
+        android:id="@+id/text_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

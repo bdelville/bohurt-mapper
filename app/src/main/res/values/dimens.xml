@@ -5,4 +5,8 @@
     <dimen name="space_medium">8dp</dimen>
     <dimen name="space_large">12dp</dimen>
     <dimen name="space_xlarge">20dp</dimen>
+
+    <!-- Timeline -->
+    <dimen name="mti_timeline_height">100dp</dimen>
+    <dimen name="mti_timeline_lbl_value">1dp</dimen>
 </resources>
