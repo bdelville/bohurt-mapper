@@ -6,54 +6,106 @@
     android:layout_height="match_parent"
     tools:context="eu.hithredin.bohurt.mapper.view.activity.HomeActivity">
 
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/title_date_start"
-        style="@style/TextTitle"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/actionBackground"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:title="@string/app_name" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/text_tuto"
+        style="@style/TextAppearance.AppCompat.Caption"
+        android:layout_width="0dip"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dip"
         android:layout_marginRight="10dip"
-        android:layout_marginTop="5dip"
+        android:gravity="fill_horizontal"
+        android:padding="@dimen/space_medium"
+        android:text="@string/home_search_tuto"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-    <com.github.badoualy.datepicker.DatePickerTimeline
-        android:id="@+id/datepicker_start"
-        android:layout_width="match_parent"
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/title_date_start"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="0dip"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/title_date_start" />
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/space_medium"
+        android:text="@string/search_date_title_start"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/title_date_end"
+        app:layout_constraintTop_toBottomOf="@+id/text_tuto" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/title_date_end"
-        style="@style/TextTitle"
-        android:layout_width="match_parent"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="0dip"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dip"
         android:layout_marginRight="10dip"
-        android:layout_marginTop="5dip"
-        app:layout_constraintTop_toBottomOf="@id/datepicker_start" />
+        android:gravity="center_horizontal"
+        android:padding="@dimen/space_medium"
+        android:text="@string/search_date_title_end"
+        app:layout_constraintLeft_toRightOf="@id/title_date_start"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_tuto" />
 
-    <com.github.badoualy.datepicker.DatePickerTimeline
-        android:id="@+id/datepicker_end"
-        android:layout_width="match_parent"
+    <EditText
+        android:id="@+id/text_date_start"
+        android:layout_width="0dip"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/title_date_end" />
+        android:layout_marginLeft="@dimen/space_medium"
+        android:layout_marginRight="@dimen/space_medium"
+        android:clickable="true"
+        android:cursorVisible="false"
+        android:editable="false"
+        android:focusableInTouchMode="false"
+        android:gravity="center_horizontal"
+        android:inputType="none"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/text_date_end"
+        app:layout_constraintTop_toBottomOf="@+id/title_date_start"
+        tools:text="My date" />
+
+    <EditText
+        android:id="@+id/text_date_end"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/space_medium"
+        android:layout_marginRight="@dimen/space_medium"
+        android:clickable="true"
+        android:cursorVisible="false"
+        android:editable="false"
+        android:focusableInTouchMode="false"
+        android:gravity="center_horizontal"
+        android:inputType="none"
+        app:layout_constraintLeft_toRightOf="@+id/text_date_start"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_date_end"
+        tools:text="My date" />
 
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/datepicker_end" />
+        app:layout_constraintTop_toBottomOf="@id/text_date_end" />
 
     <android.support.v4.widget.ContentLoadingProgressBar
         android:id="@+id/loader_map"
+        style="?android:attr/progressBarStyleLarge"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        style="?android:attr/progressBarStyleLarge"
         app:layout_constraintBottom_toBottomOf="@id/map"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

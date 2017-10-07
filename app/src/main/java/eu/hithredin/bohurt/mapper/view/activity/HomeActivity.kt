@@ -1,8 +1,9 @@
 package eu.hithredin.bohurt.mapper.view.activity
 
 import android.os.Bundle
+import android.text.format.DateFormat
 import android.widget.Toast
-import com.github.badoualy.datepicker.DatePickerTimeline
+import com.borax12.materialdaterangepicker.date.DatePickerDialog
 import com.github.kittinunf.result.failure
 import com.github.kittinunf.result.success
 import com.github.salomonbrys.kodein.instance
@@ -13,7 +14,7 @@ import com.google.android.gms.maps.model.*
 import eu.hithredin.bohurt.mapper.R
 import eu.hithredin.bohurt.mapper.model.event.EventData
 import eu.hithredin.bohurt.mapper.model.event.EventQuery
-import eu.hithredin.bohurt.mapper.utils.selectedDate
+import eu.hithredin.bohurt.mapper.utils.convertToDate
 import eu.hithredin.bohurt.mapper.view.EventListView
 import eu.hithredin.bohurt.mapper.view.framework.BaseActivity
 import eu.hithredin.ktopendatasoft.ApiLoader
@@ -31,7 +32,7 @@ import java.util.concurrent.TimeUnit
  *
  * Will be refactored when the app evolve.
  */
-class HomeActivity : BaseActivity(), EventListView {
+class HomeActivity : BaseActivity(), EventListView, DatePickerDialog.OnDateSetListener {
 
     private val logger = KotlinLogging.logger {}
     val apiLoader: ApiLoader<EventData> by injector.instance()
@@ -39,76 +40,99 @@ class HomeActivity : BaseActivity(), EventListView {
     private val disposables = CompositeDisposable()
     private lateinit var googleMap: GoogleMap
     private lateinit var iconTourney: BitmapDescriptor
+    private lateinit var iconTourneyOld: BitmapDescriptor
+    private lateinit var dateStart: Date
+    private lateinit var dateEnd: Date
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         setTitle(R.string.event_home_title_page)
-        iconTourney = BitmapDescriptorFactory.fromResource(R.drawable.map_icon_tourney_dark)
 
         // Load views
-        datepicker_start.onDateSelectedListener = object : DatePickerTimeline.OnDateSelectedListener {
-            override fun onDateSelected(year: Int, month: Int, day: Int, index: Int) {
-                if (datepicker_start.selectedDate().after(datepicker_end.selectedDate())) {
-                    datepicker_end.setSelectedDate(datepicker_start.selectedYear, datepicker_start.selectedMonth, datepicker_start.selectedDay)
-                }
-                title_date_start.text = getString(R.string.search_date_title_start, datepicker_start.selectedYear.toString())
-                observeLoad.onNext(true)
-            }
-        }
-        datepicker_end.onDateSelectedListener = DatePickerTimeline.OnDateSelectedListener { year, month, day, index ->
-            if (datepicker_start.selectedDate().after(datepicker_end.selectedDate())) {
-                datepicker_start.setSelectedDate(datepicker_end.selectedYear, datepicker_end.selectedMonth, datepicker_end.selectedDay)
-            }
-            title_date_end.text = getString(R.string.search_date_title_end, datepicker_end.selectedYear.toString())
-        }
+        text_date_start.setOnClickListener { this.pickDates() }
+        text_date_end.setOnClickListener { this.pickDates() }
 
-        // Set up form first value
+        // Set up date first value
         val now = Calendar.getInstance()
-        datepicker_start.setLastVisibleDate(now.get(Calendar.YEAR) + 2, Calendar.JANUARY, 1)
-        datepicker_end.setLastVisibleDate(now.get(Calendar.YEAR) + 2, Calendar.JANUARY, 1)
-
-        datepicker_start.setSelectedDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH) - 1)
-        datepicker_end.setSelectedDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 3, now.get(Calendar.DAY_OF_MONTH))
-        datepicker_end.setFirstVisibleDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 3, now.get(Calendar.DAY_OF_MONTH))
+        now.add(Calendar.MONTH, -1)
+        dateStart = now.time
+        now.add(Calendar.MONTH, 6)
+        dateEnd = now.time
 
         // Load map
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this::mapReady)
     }
 
+    override fun onDateSet(view: DatePickerDialog, year: Int, monthOfYear: Int, dayOfMonth: Int, yearEnd: Int, monthOfYearEnd: Int, dayOfMonthEnd: Int) {
+        dateStart = convertToDate(year, monthOfYear, dayOfMonth)
+        dateEnd = convertToDate(yearEnd, monthOfYearEnd, dayOfMonthEnd)
+        setDates()
+        observeLoad.onNext(true)
+    }
+
+    fun setDates() {
+        text_date_start.setText(DateFormat.getMediumDateFormat(this).format(dateStart))
+        text_date_end.setText(DateFormat.getMediumDateFormat(this).format(dateEnd))
+    }
+
+    private fun pickDates(): Boolean {
+        val start = Calendar.getInstance()
+        start.time = dateStart
+        val end = Calendar.getInstance()
+        end.time = dateEnd
+
+        val dpd = DatePickerDialog.newInstance(
+            this,
+            start.get(Calendar.YEAR),
+            start.get(Calendar.MONTH),
+            start.get(Calendar.DAY_OF_MONTH),
+            end.get(Calendar.YEAR),
+            end.get(Calendar.MONTH),
+            end.get(Calendar.DAY_OF_MONTH)
+        )
+        dpd.show(fragmentManager, "Datepickerdialog")
+        return true
+    }
+
     override fun onResume() {
         super.onResume()
-        disposables.add(
-                observeLoad.throttleLast(3, TimeUnit.SECONDS)
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .doOnNext { loader_map.show() }
-                        .observeOn(Schedulers.io())
-                        .map {
-                            EventQuery()
-                                    .dateStart(datepicker_start.selectedDate())
-                                    .dateEnd(datepicker_end.selectedDate())
-                        }
-                        .flatMapSingle { apiLoader.queryList(it) }
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(
-                                {
-                                    logger.info { "Result query:\n$it" }
-                                    loader_map.hide()
-                                    clearEventList()
+        setDates()
 
-                                    it.second.success {
-                                        setEvents(it.data()
-                                                ?.filter { event -> event.isValid() }
-                                                .orEmpty())
-                                    }
-                                    it.second.failure {
-                                        Toast.makeText(this, "Loading end with error", Toast.LENGTH_SHORT).show()
-                                        logger.error { "Result query:\n$it" }
-                                    }
-                                },
-                                { e -> logger.error { "observeLoad:\n$e" } }
-                        ))
+        // Wait for kotlin 1.2 to improve launch speed: if(!::googleMap.isInitialized)
+
+        disposables.add(
+            observeLoad.throttleLast(3, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext { loader_map.show() }
+                .observeOn(Schedulers.io())
+                .map {
+                    EventQuery()
+                        .dateStart(dateStart)
+                        .dateEnd(dateEnd)
+                }
+                .flatMapSingle { apiLoader.queryList(it) }
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    {
+                        logger.info { "Result query:\n$it" }
+                        loader_map.hide()
+                        clearEventList()
+
+                        it.second.success {
+                            setEvents(it.data()
+                                ?.filter { event -> event.isValid() }
+                                .orEmpty())
+                        }
+                        it.second.failure {
+                            Toast.makeText(this, "Loading end with error", Toast.LENGTH_SHORT).show()
+                            logger.error { "Result query:\n$it" }
+                        }
+                    },
+                    { e -> logger.error { "observeLoad:\n$e" } }
+                ))
     }
 
     override fun onPause() {
@@ -118,6 +142,8 @@ class HomeActivity : BaseActivity(), EventListView {
 
     fun mapReady(googleMap: GoogleMap) {
         this.googleMap = googleMap
+        iconTourney = BitmapDescriptorFactory.fromResource(R.drawable.map_icon_tourney)
+        iconTourneyOld = BitmapDescriptorFactory.fromResource(R.drawable.map_icon_tourney_dark)
         googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.map_style))
 
         setMapLocation(LatLng(42.0, 5.0))
@@ -136,13 +162,14 @@ class HomeActivity : BaseActivity(), EventListView {
     }
 
     override fun setEvents(eventList: List<EventData>) {
-        eventList?.forEach { event ->
+        val now = Date()
+        eventList.forEach { event ->
             val point = LatLng(event.location.lat(), event.location.lon())
             val marker = googleMap.addMarker(MarkerOptions()
-                    .position(point)
-                    .icon(iconTourney)
-                    .title(event.event_name)
-                    .snippet("${event.date}"))
+                .position(point)
+                .icon(if (event.date.before(now)) iconTourneyOld else iconTourney)
+                .title(event.event_name)
+                .snippet(DateFormat.getLongDateFormat(this).format(event.date)))
             marker.tag = event
             //TODO Clustering according to Zoom Level
         }

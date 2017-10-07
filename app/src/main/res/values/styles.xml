@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -10,6 +10,11 @@
         <item name="android:textColorPrimary">@color/textColorPrimary</item>
         <item name="android:windowBackground">@color/windowBackground</item>
     </style>
+
+    <style name="AppTheme.BrandedLaunch" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/branded_logo</item>
+    </style>
+
 
     <!-- TEXT STYLES -->
     <style name="CardTitle" parent="TextAppearance.AppCompat.Headline">
@@ -35,11 +40,5 @@
 
     <style name="TextAction" parent="TextAppearance.AppCompat.Button">
         <item name="android:textColor">@color/colorAccent</item>
-    </style>
-
-    <style name="TextTitle" parent="TextAppearance.AppCompat.Title">
-    </style>
-
-    <style name="TextDateForm" parent="TextAppearance.AppCompat.Title">
     </style>
 </resources>
