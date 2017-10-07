@@ -1,16 +1,17 @@
 <resources>
-    <string name="app_name">Mapper</string>
-    <string name="event_home_title_page">Search Bohurt events</string>
-    <string name="info_error_io">Failed to get the dat. Try again later</string>
+    <string name="app_name">Buhurt Mapper</string>
+    <string name="event_home_title_page">Search Buhurt events</string>
+    <string name="info_error_io">Failed to get the data. Try again later</string>
     <string name="info_data_empty">Sorry, we found nothing interesting to show here</string>
     <string name="info_error">Something bad happened. Please tell us to we can apply some duck tape</string>
     <string name="action_link">Link</string>
     <string name="action_map">Map</string>
-    <string name="search_date_title_start">Start date: %1$s</string>
-    <string name="search_date_title_end">End date: %1$s</string>
+    <string name="search_date_title_start">Start date</string>
+    <string name="search_date_title_end">End date</string>
     <string name="search_query_hint">Search for tourneys</string>
     <string name="open_event">Open external link</string>
     <string name="title_event_date">Start date:</string>
     <string name="title_event_city">City:</string>
     <string name="title_event_country">Country :</string>
+    <string name="home_search_tuto">Search for any passed or upcoming tournament between the two dates</string>
 </resources>

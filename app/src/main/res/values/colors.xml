@@ -7,6 +7,9 @@
     <color name="actionBackground">#5656a0</color>
 
     <color name="textColorPrimary">#000000</color>
+    <color name="textColorPrimaryInverse">#cecece</color>
+    <color name="textColorPrimaryReverse">#ffffff</color>
+
 
     <!-- Specific purpose colors  -->
     <color name="bg_btn_image_pressed">#ffcecece</color>

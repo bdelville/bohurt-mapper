@@ -16,6 +16,7 @@ Make it maintainable and co-developer friendly
 * Configure apiKey not in git (googleMaps, SigningKey)
 
 New Features v2
+* Integration latest: round and adaptive icon, etc...
 * Form to register a tourney
 * Form to give feedback / vote for next features
 * Button 'I am going', registered somewhere to share to other

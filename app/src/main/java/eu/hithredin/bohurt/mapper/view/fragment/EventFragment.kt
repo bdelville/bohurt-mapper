@@ -1,6 +1,7 @@
 package eu.hithredin.bohurt.mapper.view.fragment
 
 import android.os.Bundle
+import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -12,7 +13,6 @@ import eu.hithredin.bohurt.mapper.model.event.EventData
 import eu.hithredin.bohurt.mapper.utils.openUrlLink
 import eu.hithredin.bohurt.mapper.view.framework.BaseFragment
 import kotlinx.android.synthetic.main.fragment_event.*
-import java.text.DateFormat
 
 /**
  * UI for the content of a Event
@@ -47,7 +47,7 @@ class EventFragment : BaseFragment() {
         text_name.text = event.event_name
         text_city.text = event.city
         text_country.text = event.country
-        text_date.text = DateFormat.getDateInstance().format(event.date)
+        text_date.text = DateFormat.getLongDateFormat(context).format(event.date)
         text_details.text = "${event.duel_fight_categories}\n${event.group_fight_categories}"
 
         if(event.link != null) {

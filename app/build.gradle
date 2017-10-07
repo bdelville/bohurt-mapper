@@ -31,7 +31,7 @@ dependencies {
     compile "com.android.support:design:$support_version"
     compile "com.android.support.constraint:constraint-layout:$constraint_version"
 
-    compile 'com.github.badoualy:datepicker-timeline:c6dcd05737'
+    compile 'com.borax12.materialdaterangepicker:library:1.9'
 
     compile "io.github.microutils:kotlin-logging:$kotlin_logging_version"
     compile group: 'org.slf4j', name: 'slf4j-android', version: "$slf4j_android_version"

@@ -32,7 +32,7 @@
 
     <TextView
         android:id="@+id/text_date"
-        style="@style/TextAppearance.AppCompat.Medium"
+        style="@style/TextAppearance.AppCompat.Body1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@id/title_date"
@@ -51,7 +51,7 @@
 
     <TextView
         android:id="@+id/text_city"
-        style="@style/TextAppearance.AppCompat.Medium"
+        style="@style/TextAppearance.AppCompat.Body1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@id/title_city"
@@ -70,7 +70,7 @@
 
     <TextView
         android:id="@+id/text_country"
-        style="@style/TextAppearance.AppCompat.Medium"
+        style="@style/TextAppearance.AppCompat.Body1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@id/title_country"
@@ -84,6 +84,8 @@
         android:layout_height="wrap_content"
         android:text="@string/open_event"
         android:layout_marginTop="@dimen/space_medium"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:textColor="@color/textColorPrimaryReverse"
         app:layout_constraintTop_toBottomOf="@id/title_country" />
 
     <TextView
