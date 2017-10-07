@@ -13,16 +13,16 @@ import java.util.*
  * Tournament, Open training or other bohurt events
  */
 data class EventData(
-        val city: String,
-        val link: String?,
-        val event_name: String,
-        val duel_fight_categories: String,
-        val group_fight_categories: String,
-        val date: Date,
-        var location: Coordinates,
-        var end_date: Date?,
-        val timestamp: Date,
-        val country: String
+    val event_name: String,
+    val date: Date,
+    var location: Coordinates,
+    var link: String?,
+    val city: String = "",
+    val country: String = "",
+    val duel_fight_categories: String = "",
+    val group_fight_categories: String = "",
+    var end_date: Date?,
+    val timestamp: Date
 ) : Serializable {
     class Deserializer : ResponseDeserializable<ListResult<EventData>> {
         override fun deserialize(content: String) = Gson().fromJson<ListResult<EventData>>(content)
@@ -32,17 +32,20 @@ data class EventData(
      * Sanitize qnd validate after Gson deserialization
      */
     fun isValid(): Boolean {
-        if(event_name == null)
+        if (event_name == null)
             return false
-        if(location == null) {
+        if (location == null) {
             if (city == null || country == null)
                 return false
             // TODO geocode with google
         }
-        if(date == null)
+        if (date == null)
             return false
-        if(end_date == null)
+        if (end_date == null)
             end_date = date
+        if (link!!.startsWith("www")) {
+            link = "http://${link}"
+        }
         return true
     }
 }
