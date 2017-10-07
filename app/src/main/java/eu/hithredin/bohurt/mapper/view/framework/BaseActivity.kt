@@ -3,6 +3,7 @@ package eu.hithredin.bohurt.mapper.view.framework
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.view.MenuItem
 import com.github.salomonbrys.kodein.KodeinInjector
 import eu.hithredin.bohurt.mapper.R
 import eu.hithredin.bohurt.mapper.app.BohurtApp
@@ -23,11 +24,22 @@ open class BaseActivity : AppCompatActivity() {
      * @param bmf
      */
     protected fun setFragment(fragment: Fragment) {
-        if(fragment.arguments == null) fragment.arguments = Bundle()
+        if (fragment.arguments == null) fragment.arguments = Bundle()
         fragment.arguments.putAll(intent.extras)
 
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_layout, fragment, "MainFragment")
         transaction.commit()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                // Respond to the action bar's Up/Home button
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

@@ -1,34 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical">
+    android:padding="20dip">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guide_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.3" />
 
     <TextView
         android:id="@+id/text_name"
+        style="@style/TextAppearance.AppCompat.Large"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="TextAppearance.AppCompat.Title"
-        tools:text="hi you"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="hi you" />
+
+    <TextView
+        android:id="@+id/title_date"
+        style="@style/TextAppearance.AppCompat.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_medium"
+        android:text="@string/title_event_date"
+        app:layout_constraintTop_toBottomOf="@id/text_name" />
 
     <TextView
         android:id="@+id/text_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        style="@style/TextAppearance.AppCompat.Medium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/title_date"
+        app:layout_constraintLeft_toRightOf="@id/guide_title"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:text="20/09/2015" />
+
+    <TextView
+        android:id="@+id/title_city"
+        style="@style/TextAppearance.AppCompat.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_small"
+        android:text="@string/title_event_city"
+        app:layout_constraintTop_toBottomOf="@id/title_date" />
 
     <TextView
         android:id="@+id/text_city"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        style="@style/TextAppearance.AppCompat.Medium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/title_city"
+        app:layout_constraintLeft_toRightOf="@id/guide_title"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:text="hi you" />
+
+    <TextView
+        android:id="@+id/title_country"
+        style="@style/TextAppearance.AppCompat.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_small"
+        android:text="@string/title_event_country"
+        app:layout_constraintTop_toBottomOf="@id/title_city" />
 
     <TextView
         android:id="@+id/text_country"
+        style="@style/TextAppearance.AppCompat.Medium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/title_country"
+        app:layout_constraintLeft_toRightOf="@id/guide_title"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:text="hi you" />
+
+    <Button
+        android:id="@+id/btn_details"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="@string/open_event"
+        android:layout_marginTop="@dimen/space_medium"
+        app:layout_constraintTop_toBottomOf="@id/title_country" />
 
     <TextView
         android:id="@+id/text_details"
+        style="@style/TextAppearance.AppCompat.Body1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_block"
+        app:layout_constraintTop_toBottomOf="@id/btn_details"
+        tools:text="hi you" />
+
+</android.support.constraint.ConstraintLayout>

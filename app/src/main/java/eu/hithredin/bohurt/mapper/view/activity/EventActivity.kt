@@ -8,6 +8,7 @@ import eu.hithredin.bohurt.mapper.app.DATA_KEY
 import eu.hithredin.bohurt.mapper.model.event.EventData
 import eu.hithredin.bohurt.mapper.view.fragment.EventFragment
 import eu.hithredin.bohurt.mapper.view.framework.BaseActivity
+import kotlinx.android.synthetic.main.activity_base_fragment.*
 
 /**
  * Details page of the Event
@@ -25,7 +26,9 @@ class EventActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base_fragment)
-
         setFragment(EventFragment.startFragment(intent.extras))
+
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 }

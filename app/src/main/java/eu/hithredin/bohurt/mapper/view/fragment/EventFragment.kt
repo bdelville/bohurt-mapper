@@ -41,6 +41,9 @@ class EventFragment : BaseFragment() {
         super.populateViews(savedInstanceState)
         event = arguments.get(DATA_KEY) as EventData
 
+        activity.title = event.event_name
+        //(activity as AppCompatActivity).supportActionBar?.title = event.event_name
+
         text_name.text = event.event_name
         text_city.text = event.city
         text_country.text = event.country

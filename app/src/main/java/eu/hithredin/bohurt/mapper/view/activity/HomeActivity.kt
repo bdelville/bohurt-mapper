@@ -44,7 +44,7 @@ class HomeActivity : BaseActivity(), EventListView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         setTitle(R.string.event_home_title_page)
-        iconTourney = BitmapDescriptorFactory.fromResource(R.drawable.map_icon_tourney_dark)
+        iconTourney = BitmapDescriptorFactory.fromResource(R.drawable.map_icon_tourney)
 
         // Load views
         datepicker_start.onDateSelectedListener = object : DatePickerTimeline.OnDateSelectedListener {
@@ -80,35 +80,35 @@ class HomeActivity : BaseActivity(), EventListView {
     override fun onResume() {
         super.onResume()
         disposables.add(
-                observeLoad.throttleLast(3, TimeUnit.SECONDS)
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .doOnNext { loader_map.show() }
-                        .observeOn(Schedulers.io())
-                        .map {
-                            EventQuery()
-                                    .dateStart(datepicker_start.selectedDate())
-                                    .dateEnd(datepicker_end.selectedDate())
-                        }
-                        .flatMapSingle { apiLoader.queryList(it) }
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(
-                                {
-                                    logger.info { "Result query:\n$it" }
-                                    loader_map.hide()
-                                    clearEventList()
+            observeLoad.throttleLast(3, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext { loader_map.show() }
+                .observeOn(Schedulers.io())
+                .map {
+                    EventQuery()
+                        .dateStart(datepicker_start.selectedDate())
+                        .dateEnd(datepicker_end.selectedDate())
+                }
+                .flatMapSingle { apiLoader.queryList(it) }
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    {
+                        logger.info { "Result query:\n$it" }
+                        loader_map.hide()
+                        clearEventList()
 
-                                    it.second.success {
-                                        setEvents(it.data()
-                                                ?.filter { event -> event.isValid() }
-                                                .orEmpty())
-                                    }
-                                    it.second.failure {
-                                        Toast.makeText(this, "Loading end with error", Toast.LENGTH_SHORT).show()
-                                        logger.error { "Result query:\n$it" }
-                                    }
-                                },
-                                { e -> logger.error { "observeLoad:\n$e" } }
-                        ))
+                        it.second.success {
+                            setEvents(it.data()
+                                ?.filter { event -> event.isValid() }
+                                .orEmpty())
+                        }
+                        it.second.failure {
+                            Toast.makeText(this, "Loading end with error", Toast.LENGTH_SHORT).show()
+                            logger.error { "Result query:\n$it" }
+                        }
+                    },
+                    { e -> logger.error { "observeLoad:\n$e" } }
+                ))
     }
 
     override fun onPause() {
@@ -139,10 +139,10 @@ class HomeActivity : BaseActivity(), EventListView {
         eventList?.forEach { event ->
             val point = LatLng(event.location.lat(), event.location.lon())
             val marker = googleMap.addMarker(MarkerOptions()
-                    .position(point)
-                    .icon(iconTourney)
-                    .title(event.event_name)
-                    .snippet("${event.date}"))
+                .position(point)
+                .icon(iconTourney)
+                .title(event.event_name)
+                .snippet("${event.date}"))
             marker.tag = event
             //TODO Clustering according to Zoom Level
         }
