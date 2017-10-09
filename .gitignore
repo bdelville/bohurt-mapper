@@ -13,3 +13,4 @@ build
 *.log
 **/google_maps_api.xml
 *.keystore
+app/release/
