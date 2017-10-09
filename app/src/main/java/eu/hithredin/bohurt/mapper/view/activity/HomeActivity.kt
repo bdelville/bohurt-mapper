@@ -51,8 +51,8 @@ class HomeActivity : BaseActivity(), EventListView, DatePickerDialog.OnDateSetLi
         setTitle(R.string.event_home_title_page)
 
         // Load views
-        text_date_start.setOnClickListener { this.pickDates() }
-        text_date_end.setOnClickListener { this.pickDates() }
+        text_date_start.setOnClickListener { this.pickDates(true) }
+        text_date_end.setOnClickListener { this.pickDates(false) }
 
         // Set up date first value
         val now = Calendar.getInstance()
@@ -78,7 +78,7 @@ class HomeActivity : BaseActivity(), EventListView, DatePickerDialog.OnDateSetLi
         text_date_end.setText(DateFormat.getMediumDateFormat(this).format(dateEnd))
     }
 
-    private fun pickDates(): Boolean {
+    private fun pickDates(selectFrom: Boolean): Boolean {
         val start = Calendar.getInstance()
         start.time = dateStart
         val end = Calendar.getInstance()
@@ -112,6 +112,7 @@ class HomeActivity : BaseActivity(), EventListView, DatePickerDialog.OnDateSetLi
                     EventQuery()
                         .dateStart(dateStart)
                         .dateEnd(dateEnd)
+                        .rowCount(40)
                 }
                 .flatMapSingle { apiLoader.queryList(it) }
                 .observeOn(AndroidSchedulers.mainThread())

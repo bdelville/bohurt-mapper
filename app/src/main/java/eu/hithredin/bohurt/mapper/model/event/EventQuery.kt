@@ -27,7 +27,7 @@ class EventQuery : ApiQuery(dataSetEvents) {
     }
 
     fun searchText(query: String): EventQuery {
-        andsQ.add("q=" + query)
+        andsQ.add("q=$query")
         return this
     }
 }
