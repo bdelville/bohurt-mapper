@@ -74,14 +74,15 @@ class HomeActivity : BaseActivity(), EventListView, DatePickerDialog.OnDateSetLi
     }
 
     fun setDates() {
-        text_date_start.setText(DateFormat.getMediumDateFormat(this).format(dateStart))
-        text_date_end.setText(DateFormat.getMediumDateFormat(this).format(dateEnd))
+        text_date_start.setText(DateFormat.getLongDateFormat(this).format(dateStart))
+        text_date_end.setText(DateFormat.getLongDateFormat(this).format(dateEnd))
     }
 
     private fun pickDates(selectFrom: Boolean): Boolean {
         val start = Calendar.getInstance()
         start.time = dateStart
         val end = Calendar.getInstance()
+        end.add(Calendar.MONTH, 3)
         end.time = dateEnd
 
         val dpd = DatePickerDialog.newInstance(
@@ -93,6 +94,17 @@ class HomeActivity : BaseActivity(), EventListView, DatePickerDialog.OnDateSetLi
             end.get(Calendar.MONTH),
             end.get(Calendar.DAY_OF_MONTH)
         )
+
+        // Set limits
+        val maxDate = Calendar.getInstance()
+        maxDate.add(Calendar.MONTH, 18)
+        dpd.maxDate = maxDate
+        val minDate = Calendar.getInstance()
+        minDate.add(Calendar.MONTH, -36)
+        dpd.minDate = minDate
+
+        dpd.isAutoHighlight = true
+
         dpd.show(fragmentManager, "Datepickerdialog")
         return true
     }
