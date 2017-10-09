@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Buhurt Map</string>
+    <string name="event_home_title_page">Trouver un tournoi</string>
+    <string name="info_error_io">Aucune donnée. Veuillez réessayer 50 burpies plus tard</string>
+    <string name="info_data_empty">Aucune donnée ne correspond à votre recherche</string>
+    <string name="info_error">Une défaut est apparu. N\'hésitez pas à nous informer, qu\'on rajoute une rondelle.</string>
+    <string name="action_link">Lien</string>
+    <string name="action_map">Carte</string>
+    <string name="search_date_title_start">Depuis</string>
+    <string name="search_date_title_end">Jusqu\'à</string>
+    <string name="search_query_hint">Recherche de tournois</string>
+    <string name="open_event">Ouvre le lien externe</string>
+    <string name="title_event_date">Débute le:</string>
+    <string name="title_event_city">Ville:</string>
+    <string name="title_event_country">Parys:</string>
+    <string name="home_search_tuto">Vous pouvez chercher les tournois passés ou à venir entre les dates sélectionnées.</string>
+</resources>
