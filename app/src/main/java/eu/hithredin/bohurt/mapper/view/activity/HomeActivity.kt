@@ -79,6 +79,7 @@ class HomeActivity : BaseActivity(), EventListView, DatePickerDialog.OnDateSetLi
     }
 
     private fun pickDates(selectFrom: Boolean): Boolean {
+        // todo change again to a better date picker
         val start = Calendar.getInstance()
         start.time = dateStart
         val end = Calendar.getInstance()

@@ -1,4 +1,11 @@
+* Refactor
+- Make date chooser design better (other libraries)
+--> edit text / button
+OR
+--> https://github.com/savvisingh/DateRangePicker
 
+- Use Klaxon for JSON
+* Introduce MVP for later Kotlin Native
 
 Minimum new Features
 * Detail page of event
@@ -10,7 +17,6 @@ Minimum new Features
 
 Make it maintainable and co-developer friendly
 * Configure checkstyles, lint
-* Introduce MVP
 * Unit-Test the library
 * CLI build with docker (wercker, ship)
 * Configure apiKey not in git (googleMaps, SigningKey)
