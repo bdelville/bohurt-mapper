@@ -3,11 +3,26 @@ package eu.hithredin.bohurt.mapper.view.framework
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.View
+import eu.hithredin.bohurt.common.mvp.presenter.Presenter
 
 /**
  * INSERT DOC
  */
 abstract class BaseFragment : Fragment() {
+    private var presenters: List<Lazy<Presenter>> = emptyList()
+
+    override fun onStart() {
+        super.onStart()
+        presenters.forEach { it.value.screenOpen() }
+    }
+
+    override fun onStop() {
+        presenters.forEach { it.value.screenClose() }
+        super.onStop()
+    }
+
+    protected fun <T : Presenter> loadPresenter(init: () -> T) = lazy(init)
+        .also { presenters += it }
 
     /**
      * Extract the Views from the layout
