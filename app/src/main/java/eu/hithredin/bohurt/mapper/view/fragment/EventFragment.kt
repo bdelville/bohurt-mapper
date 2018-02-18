@@ -7,9 +7,9 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import eu.hithredin.bohurt.common.data.EventData
+import eu.hithredin.bohurt.common.utils.DATA_KEY
 import eu.hithredin.bohurt.mapper.R
-import eu.hithredin.bohurt.mapper.app.DATA_KEY
-import eu.hithredin.bohurt.mapper.model.event.EventData
 import eu.hithredin.bohurt.mapper.utils.openUrlLink
 import eu.hithredin.bohurt.mapper.view.framework.BaseFragment
 import kotlinx.android.synthetic.main.fragment_event.*

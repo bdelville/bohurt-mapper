@@ -1,6 +1,8 @@
 
-
-- Use Klaxon for JSON and a native Network library (Not yet mature)
+Refacto architecture:
+* Use NavigationModel with android Intent implementation for navigation
+* Make a new nicer Kotlinesque ListView framework
+*
 
 
 Minimum new Features
@@ -22,6 +24,10 @@ New Features v2
 * Form to register a tourney
 * Form to give feedback / vote for next features
 * Button 'I am going', registered somewhere to share to other
+
+
+Later (When Kotlin Native libraries will be more mature)
+- Use (Klaxon?) for JSON and a Native Network library
 
 
 To Note:

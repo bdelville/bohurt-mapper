@@ -3,10 +3,10 @@ package eu.hithredin.bohurt.mapper.view.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import eu.hithredin.bohurt.common.data.EventData
+import eu.hithredin.bohurt.common.utils.DATA_KEY
+import eu.hithredin.bohurt.common.utils.DATA_TITLE
 import eu.hithredin.bohurt.mapper.R
-import eu.hithredin.bohurt.mapper.app.DATA_KEY
-import eu.hithredin.bohurt.mapper.app.DATA_TITLE
-import eu.hithredin.bohurt.mapper.model.event.EventData
 import eu.hithredin.bohurt.mapper.view.fragment.EventFragment
 import eu.hithredin.bohurt.mapper.view.framework.BaseActivity
 import kotlinx.android.synthetic.main.activity_base_fragment.*

@@ -22,7 +22,7 @@ android {
 }
 
 dependencies {
-    compile project(':ktopendatasoft')
+    compile project(':common')
 
     compile "com.android.support:support-v4:$support_version"
     compile "com.android.support:appcompat-v7:$support_version"
@@ -32,10 +32,6 @@ dependencies {
     compile "com.android.support.constraint:constraint-layout:$constraint_version"
 
     compile 'com.borax12.materialdaterangepicker:library:1.9'
-
-    compile "io.github.microutils:kotlin-logging:$kotlin_logging_version"
-    compile group: 'org.slf4j', name: 'slf4j-android', version: "$slf4j_android_version"
-    compile "com.github.salomonbrys.kodein:kodein:$kodein_version"
 
     compile "com.google.android.gms:play-services-maps:$play_services_maps_version"
 
