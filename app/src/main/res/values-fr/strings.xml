@@ -6,8 +6,8 @@
     <string name="info_error">Une défaut est apparu. N\'hésitez pas à nous informer, qu\'on rajoute une rondelle.</string>
     <string name="action_link">Lien</string>
     <string name="action_map">Carte</string>
-    <string name="search_date_title_start">Depuis</string>
-    <string name="search_date_title_end">Jusqu\'à</string>
+    <string name="search_date_title_start">Du</string>
+    <string name="search_date_title_end">Au</string>
     <string name="search_query_hint">Recherche de tournois</string>
     <string name="open_event">Ouvre le lien externe</string>
     <string name="title_event_date">Débute le:</string>

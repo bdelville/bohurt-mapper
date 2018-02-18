@@ -2,6 +2,7 @@ package eu.hithredin.bohurt.mapper.view.activity
 
 import android.os.Bundle
 import android.text.format.DateFormat
+import android.view.View
 import android.widget.Toast
 import com.borax12.materialdaterangepicker.date.DatePickerDialog
 import com.github.kittinunf.result.failure
@@ -16,6 +17,7 @@ import eu.hithredin.bohurt.mapper.model.event.EventData
 import eu.hithredin.bohurt.mapper.model.event.EventQuery
 import eu.hithredin.bohurt.mapper.utils.convertToDate
 import eu.hithredin.bohurt.mapper.view.EventListView
+import eu.hithredin.bohurt.mapper.view.addOnClickListener
 import eu.hithredin.bohurt.mapper.view.framework.BaseActivity
 import eu.hithredin.ktopendatasoft.ApiLoader
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -51,8 +53,7 @@ class HomeActivity : BaseActivity(), EventListView, DatePickerDialog.OnDateSetLi
         setTitle(R.string.event_home_title_page)
 
         // Load views
-        text_date_start.setOnClickListener { this.pickDates(true) }
-        text_date_end.setOnClickListener { this.pickDates(false) }
+        btn_date_range.addOnClickListener (View.OnClickListener { pickDates(true) })
 
         // Set up date first value
         val now = Calendar.getInstance()
@@ -74,8 +75,8 @@ class HomeActivity : BaseActivity(), EventListView, DatePickerDialog.OnDateSetLi
     }
 
     fun setDates() {
-        text_date_start.setText(DateFormat.getLongDateFormat(this).format(dateStart))
-        text_date_end.setText(DateFormat.getLongDateFormat(this).format(dateEnd))
+        text_date_start.text = DateFormat.getLongDateFormat(this).format(dateStart)
+        text_date_end.text = DateFormat.getLongDateFormat(this).format(dateEnd)
     }
 
     private fun pickDates(selectFrom: Boolean): Boolean {
@@ -103,7 +104,6 @@ class HomeActivity : BaseActivity(), EventListView, DatePickerDialog.OnDateSetLi
         val minDate = Calendar.getInstance()
         minDate.add(Calendar.MONTH, -36)
         dpd.minDate = minDate
-
         dpd.isAutoHighlight = true
 
         dpd.show(fragmentManager, "Datepickerdialog")
@@ -113,8 +113,6 @@ class HomeActivity : BaseActivity(), EventListView, DatePickerDialog.OnDateSetLi
     override fun onResume() {
         super.onResume()
         setDates()
-
-        // Wait for kotlin 1.2 to improve launch speed: if(!::googleMap.isInitialized)
 
         disposables.add(
             observeLoad.throttleLast(3, TimeUnit.SECONDS)

@@ -15,19 +15,25 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:title="@string/app_name" />
 
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/text_tuto"
-        style="@style/TextAppearance.AppCompat.Caption"
-        android:layout_width="0dip"
+    <android.support.constraint.Group
+        android:id="@+id/btn_date_range"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dip"
-        android:layout_marginRight="10dip"
-        android:gravity="fill_horizontal"
-        android:padding="@dimen/space_medium"
-        android:text="@string/home_search_tuto"
+        android:clickable="true"
+        android:focusable="true"
+        app:constraint_referenced_ids="date_picker,title_date_start,title_date_end,text_date_start,text_date_end" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/date_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="mini"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintBottom_toTopOf="@id/map"
+        android:src="@drawable/ic_arrow_forward_black_24dp"
+        android:tint="@color/textColorPrimaryInverse"/>
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/title_date_start"
@@ -40,8 +46,8 @@
         android:padding="@dimen/space_medium"
         android:text="@string/search_date_title_start"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/title_date_end"
-        app:layout_constraintTop_toBottomOf="@+id/text_tuto" />
+        app:layout_constraintRight_toLeftOf="@+id/date_picker"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/title_date_end"
@@ -53,40 +59,30 @@
         android:gravity="center_horizontal"
         android:padding="@dimen/space_medium"
         android:text="@string/search_date_title_end"
-        app:layout_constraintLeft_toRightOf="@id/title_date_start"
+        app:layout_constraintLeft_toRightOf="@id/date_picker"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_tuto" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-    <EditText
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/text_date_start"
         android:layout_width="0dip"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/space_medium"
         android:layout_marginRight="@dimen/space_medium"
-        android:clickable="true"
-        android:cursorVisible="false"
-        android:editable="false"
-        android:focusableInTouchMode="false"
         android:gravity="center_horizontal"
-        android:inputType="none"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/text_date_end"
+        app:layout_constraintRight_toLeftOf="@+id/date_picker"
         app:layout_constraintTop_toBottomOf="@+id/title_date_start"
         tools:text="My date" />
 
-    <EditText
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/text_date_end"
         android:layout_width="0dip"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/space_medium"
         android:layout_marginRight="@dimen/space_medium"
-        android:clickable="true"
-        android:cursorVisible="false"
-        android:editable="false"
-        android:focusableInTouchMode="false"
         android:gravity="center_horizontal"
-        android:inputType="none"
-        app:layout_constraintLeft_toRightOf="@+id/text_date_start"
+        app:layout_constraintLeft_toRightOf="@+id/date_picker"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_date_end"
         tools:text="My date" />

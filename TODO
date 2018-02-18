@@ -1,11 +1,7 @@
-* Refactor
-- Make date chooser design better (other libraries)
---> edit text / button
-OR
---> https://github.com/savvisingh/DateRangePicker
 
-- Use Klaxon for JSON
-* Introduce MVP for later Kotlin Native
+
+- Use Klaxon for JSON and a native Network library (Not yet mature)
+
 
 Minimum new Features
 * Detail page of event
@@ -26,3 +22,8 @@ New Features v2
 * Form to register a tourney
 * Form to give feedback / vote for next features
 * Button 'I am going', registered somewhere to share to other
+
+
+To Note:
+Can be used (big screens) :
+https://github.com/savvisingh/DateRangePicker

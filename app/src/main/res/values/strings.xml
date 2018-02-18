@@ -6,8 +6,8 @@
     <string name="info_error">Something bad happened. Please tell us so we can apply some duck tape</string>
     <string name="action_link">Link</string>
     <string name="action_map">Map</string>
-    <string name="search_date_title_start">Start date</string>
-    <string name="search_date_title_end">End date</string>
+    <string name="search_date_title_start">From</string>
+    <string name="search_date_title_end">To</string>
     <string name="search_query_hint">Search for tourneys</string>
     <string name="open_event">Open external link</string>
     <string name="title_event_date">Start date:</string>
