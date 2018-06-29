@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Mapper.iml" filepath="$PROJECT_DIR$/Mapper.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/bohurt-mapper.iml" filepath="$PROJECT_DIR$/bohurt-mapper.iml" />
       <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
-      <module fileurl="file://$PROJECT_DIR$/easingdaterange/easingdaterange.iml" filepath="$PROJECT_DIR$/easingdaterange/easingdaterange.iml" />
       <module fileurl="file://$PROJECT_DIR$/ktopendatasoft/ktopendatasoft.iml" filepath="$PROJECT_DIR$/ktopendatasoft/ktopendatasoft.iml" />
     </modules>
   </component>
