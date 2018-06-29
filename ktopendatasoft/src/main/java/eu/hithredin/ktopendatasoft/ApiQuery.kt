@@ -1,7 +1,9 @@
 package eu.hithredin.ktopendatasoft
 
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.HashMap
+import java.util.HashSet
 
 val dateFormat = SimpleDateFormat("yyyy/MM/dd")
 val dayFormat = SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss")
@@ -29,7 +31,7 @@ open class ApiQuery(val dataset: String) {
     }
 
     fun sortBy(fieldName: String, ascending: Boolean = false): ApiQuery {
-        params.put("sort", if (ascending) "+" else "-" + fieldName)
+        params.put("sort", if (ascending) "+" else "-$fieldName")
         return this
     }
 

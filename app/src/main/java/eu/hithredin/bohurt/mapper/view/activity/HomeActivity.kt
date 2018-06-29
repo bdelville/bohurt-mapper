@@ -8,7 +8,12 @@ import com.borax12.materialdaterangepicker.date.DatePickerDialog
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.*
+import com.google.android.gms.maps.model.BitmapDescriptor
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.maps.model.MapStyleOptions
+import com.google.android.gms.maps.model.MarkerOptions
 import eu.hithredin.bohurt.common.data.EventData
 import eu.hithredin.bohurt.common.mvp.presenter.EventMapPresenter
 import eu.hithredin.bohurt.common.mvp.view.EventMapView
@@ -20,7 +25,8 @@ import eu.hithredin.bohurt.mapper.utils.toLatLng
 import eu.hithredin.bohurt.mapper.view.framework.BaseActivity
 import eu.hithredin.ktopendatasoft.GpsLocation
 import kotlinx.android.synthetic.main.activity_home.*
-import java.util.*
+import java.util.Calendar
+import java.util.Date
 
 /**
  * Main screen of the application.
@@ -84,17 +90,17 @@ class HomeActivity : BaseActivity(), EventMapView, DatePickerDialog.OnDateSetLis
         return true
     }
 
-    fun mapReady(googleMap: GoogleMap) {
+    private fun mapReady(googleMap: GoogleMap) {
         this.googleMap = googleMap
         iconTourney = BitmapDescriptorFactory.fromResource(R.drawable.map_icon_tourney)
         iconTourneyOld = BitmapDescriptorFactory.fromResource(R.drawable.map_icon_tourney_dark)
         googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.map_style))
 
         setMapLocation(GpsLocation(42.0, 5.0))
-        googleMap.setOnInfoWindowClickListener({ marker ->
+        googleMap.setOnInfoWindowClickListener { marker ->
             val event: EventData = marker.tag as EventData
             EventActivity.startActivity(this, event)
-        })
+        }
 
         googleMap.uiSettings.isZoomControlsEnabled = true
         googleMap.uiSettings.isTiltGesturesEnabled = false

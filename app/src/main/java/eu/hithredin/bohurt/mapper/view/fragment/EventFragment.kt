@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_event.*
  * UI for the content of a Event
  */
 class EventFragment : BaseFragment() {
-    lateinit var event: EventData
+    private lateinit var event: EventData
 
     companion object {
         fun startFragment(extras: Bundle): EventFragment {

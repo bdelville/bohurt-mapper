@@ -1,4 +1,4 @@
 package eu.hithredin.bohurt.common.utils
 
-val DATA_KEY = "data-key"
-val DATA_TITLE = "data-title"
+const val DATA_KEY = "data-key"
+const val DATA_TITLE = "data-title"

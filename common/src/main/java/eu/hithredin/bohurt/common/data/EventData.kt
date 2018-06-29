@@ -7,10 +7,12 @@ import eu.hithredin.ktopendatasoft.Coordinates
 import eu.hithredin.ktopendatasoft.ListResult
 import eu.hithredin.ktopendatasoft.genericType
 import java.io.Serializable
-import java.util.*
+import java.util.Date
 
 /**
  * Tournament, Open training or other bohurt events
+ *
+ * TODO get rid of GSON and avoid this weird null system
  */
 data class EventData(
     val event_name: String,

@@ -14,8 +14,8 @@ import mu.KotlinLogging
  */
 open class ApiLoader<T : Any>(
         domain: String,
-        val deserializer: ResponseDeserializable<ListResult<T>>) {
-    protected var baseUrl: String = "https://$domain.my.opendatasoft.com/api/records/1.0/search/?"
+        private val deserializer: ResponseDeserializable<ListResult<T>>) {
+    private var baseUrl: String = "https://$domain.my.opendatasoft.com/api/records/1.0/search/?"
     private val logger = KotlinLogging.logger {}
 
     fun queryList(query: ApiQuery): Single<Pair<Response, Result<ListResult<T>, FuelError>>> {
