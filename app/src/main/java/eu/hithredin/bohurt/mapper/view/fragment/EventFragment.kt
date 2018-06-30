@@ -48,7 +48,10 @@ class EventFragment : BaseFragment() {
         text_city.text = event.city
         text_country.text = event.country
         text_date.text = DateFormat.getLongDateFormat(context).format(event.date)
-        text_details.text = "${event.duel_fight_categories}\n${event.group_fight_categories}"
+
+        var description = if (event.fight_categories != null) "${event.fight_categories}\n\n" else ""
+        description += if (event.description != null) "${event.description}\n\n" else ""
+        text_details.text = description
 
         if(event.link != null) {
             btn_details.visibility = VISIBLE

@@ -21,8 +21,8 @@ data class EventData(
     var link: String?,
     val city: String = "",
     val country: String = "",
-    val duel_fight_categories: String = "",
-    val group_fight_categories: String = "",
+    val fight_categories: String = "",
+    val description: String = "",
     var end_date: Date?,
     val timestamp: Date
 ) : Serializable {
