@@ -30,19 +30,19 @@ class EventFragment : BaseFragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val root = inflater!!.inflate(R.layout.fragment_event, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        val root = inflater.inflate(R.layout.fragment_event, container, false)
         return root
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         populateViews(savedInstanceState)
     }
 
     override fun populateViews(savedInstanceState: Bundle?) {
         super.populateViews(savedInstanceState)
-        event = arguments.get(DATA_KEY) as EventData
+        event = arguments!!.get(DATA_KEY) as EventData
 
         text_name.text = event.event_name
         text_city.text = event.city
@@ -55,7 +55,7 @@ class EventFragment : BaseFragment() {
 
         if(event.link != null) {
             btn_details.visibility = VISIBLE
-            btn_details.setOnClickListener { openUrlLink(context, event.link!!) }
+            btn_details.setOnClickListener { openUrlLink(context!!, event.link!!) }
         } else {
             btn_details.visibility = GONE
         }

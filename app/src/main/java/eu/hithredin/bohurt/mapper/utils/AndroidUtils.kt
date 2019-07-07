@@ -3,7 +3,7 @@ package eu.hithredin.bohurt.mapper.utils
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.support.constraint.Group
+import androidx.constraintlayout.widget.Group
 import android.view.View
 
 /**

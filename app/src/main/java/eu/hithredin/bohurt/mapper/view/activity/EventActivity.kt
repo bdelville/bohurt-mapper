@@ -28,7 +28,7 @@ class EventActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base_fragment)
-        setFragment(EventFragment.startFragment(intent.extras))
+        setFragment(EventFragment.startFragment(intent.extras!!))
         title = intent.getStringExtra(DATA_TITLE)
 
         setSupportActionBar(toolbar)

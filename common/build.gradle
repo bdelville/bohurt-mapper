@@ -3,15 +3,15 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 29
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 26
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -24,16 +24,16 @@ android {
 }
 
 dependencies {
-    compile project(':ktopendatasoft')
+    implementation project(':ktopendatasoft')
 
-    compile "io.github.microutils:kotlin-logging:$kotlin_logging_version"
-    compile group: 'org.slf4j', name: 'slf4j-android', version: "$slf4j_android_version"
-    compile "com.github.salomonbrys.kodein:kodein:$kodein_version"
+    implementation "io.github.microutils:kotlin-logging:$kotlin_logging_version"
+    implementation group: 'org.slf4j', name: 'slf4j-android', version: "$slf4j_android_version"
+    implementation "com.github.salomonbrys.kodein:kodein:$kodein_version"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'androidx.appcompat:appcompat:1.0.0'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    androidTestImplementation 'androidx.test:runner:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
 }
