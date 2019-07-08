@@ -1,9 +1,9 @@
 package eu.hithredin.bohurt.mapper.app
 
 import android.app.Application
-import com.github.salomonbrys.kodein.Kodein
-import com.github.salomonbrys.kodein.KodeinAware
-import com.github.salomonbrys.kodein.lazy
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
+import org.kodein.di.lazy
 import com.squareup.leakcanary.LeakCanary
 import eu.hithredin.bohurt.common.initBohurtLib
 import eu.hithredin.bohurt.common.libModule

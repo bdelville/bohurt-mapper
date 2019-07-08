@@ -1,12 +1,6 @@
 package eu.hithredin.bohurt.common.mvp.presenter
 
-import com.github.kittinunf.fuel.core.FuelError
 import com.github.kittinunf.fuel.core.Response
-import com.github.kittinunf.result.Result
-import com.github.kittinunf.result.failure
-import com.github.kittinunf.result.success
-import com.github.salomonbrys.kodein.KodeinInjector
-import com.github.salomonbrys.kodein.instance
 import eu.hithredin.bohurt.common.data.EventData
 import eu.hithredin.bohurt.common.data.EventQuery
 import eu.hithredin.bohurt.common.mvp.view.EventMapView
@@ -18,6 +12,8 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import mu.KotlinLogging
+import org.kodein.di.Kodein
+import org.kodein.di.generic.instance
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -26,9 +22,9 @@ import java.util.concurrent.TimeUnit
  *
  * Communicate mainly by a SearchViewModel that contains search criterias
  */
-class EventMapPresenter(val view: EventMapView, injector: KodeinInjector) : Presenter {
+class EventMapPresenter(kodein: Kodein, val view: EventMapView) : Presenter {
     private val logger = KotlinLogging.logger {}
-    private val apiLoader: ApiLoader<EventData> by injector.instance()
+    private val apiLoader: ApiLoader<EventData> by kodein.instance()
     private val observeLoad = PublishSubject.create<Boolean>()
     private val disposables = CompositeDisposable()
 
@@ -71,16 +67,17 @@ class EventMapPresenter(val view: EventMapView, injector: KodeinInjector) : Pres
                 ))
     }
 
-    private fun searchResult(result: Pair<Response, Result<ListResult<EventData>, FuelError>>) {
+    private fun searchResult(result: Pair<Response, ListResult<EventData>>) {
         logger.info { "Result query:\n$result" }
         view.showLoader(false)
         view.setEvents(emptyList(), false)
 
-        result.second.success {
+        // TODO Error handling now?
+        result.second.let {
             view.setEvents(it.data()?.filter { event -> event.isValid() }.orEmpty(),
                 true)
         }
-        result.second.failure {
+        result.first.let {
             view.showError("Loading error")
             logger.error { "Result query:\n$it" }
         }

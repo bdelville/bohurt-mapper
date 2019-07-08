@@ -24,9 +24,26 @@ android {
 
 dependencies {
     implementation project(':common')
+    implementation project(':ktopendatasoft')
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation "com.google.code.gson:gson:$gson_version"
+
+    implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
+    implementation "io.reactivex.rxjava2:rxandroid:2.0.1"
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation "com.github.salomonbrys.kotson:kotson:$kotson_version"
+    implementation "io.github.microutils:kotlin-logging:$kotlin_logging_version"
+    implementation "com.github.kittinunf.fuel:fuel:$fuel_version"
+    implementation "com.github.kittinunf.fuel:fuel-rxjava:$fuel_version"
+    implementation "com.github.kittinunf.fuel:fuel-gson:$fuel_version"
+    implementation 'com.github.kittinunf.fuse:fuse:0.2'
+    implementation "com.github.kittinunf.result:result:$fuel_version" //for jvm
+    implementation "org.kodein.di:kodein-di-generic-jvm:$kodein_version"
+    implementation "org.kodein.di:kodein-di-framework-android-support:$kodein_version"
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'

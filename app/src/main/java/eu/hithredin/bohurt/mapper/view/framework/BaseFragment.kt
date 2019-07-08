@@ -9,7 +9,7 @@ import eu.hithredin.bohurt.common.mvp.presenter.Presenter
  * INSERT DOC
  */
 abstract class BaseFragment : Fragment() {
-    private var presenters: List<Lazy<Presenter>> = emptyList()
+    private val presenters: MutableList<Lazy<Presenter>> = ArrayList()
 
     override fun onStart() {
         super.onStart()
@@ -39,7 +39,7 @@ abstract class BaseFragment : Fragment() {
     }
 
     fun string(id: Int): String {
-        return activity.getString(id)
+        return activity!!.getString(id)
     }
 }
 

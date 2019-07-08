@@ -2,16 +2,16 @@ package eu.hithredin.bohurt.common
 
 import android.app.Application
 import com.github.kittinunf.fuse.core.Fuse
-import com.github.salomonbrys.kodein.Kodein
-import com.github.salomonbrys.kodein.bind
-import com.github.salomonbrys.kodein.singleton
+import org.kodein.di.Kodein
 import eu.hithredin.bohurt.common.data.EventData
 import eu.hithredin.ktopendatasoft.ApiLoader
+import org.kodein.di.generic.bind
+import org.kodein.di.generic.singleton
 
 /**
  * Declare Libraries (OpenDataSoft) modules here, to be injected in Application
  */
-val libModule = Kodein.Module {
+val libModule = Kodein.Module("common") {
     bind<ApiLoader<EventData>>() with singleton {
         ApiLoader("hithredin", EventData.Deserializer())
     }

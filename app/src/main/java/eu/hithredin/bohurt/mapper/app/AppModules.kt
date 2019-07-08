@@ -1,10 +1,10 @@
 package eu.hithredin.bohurt.mapper.app
 
-import com.github.salomonbrys.kodein.Kodein
+import org.kodein.di.Kodein
 
 /**
  * Declare all Application modules here, to be injected in Application
  */
-val appModule = Kodein.Module {
+val appModule = Kodein.Module("app") {
 
 }

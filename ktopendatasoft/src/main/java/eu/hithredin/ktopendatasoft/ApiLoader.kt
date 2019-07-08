@@ -1,11 +1,9 @@
 package eu.hithredin.ktopendatasoft
 
 import com.github.kittinunf.fuel.Fuel
-import com.github.kittinunf.fuel.core.FuelError
 import com.github.kittinunf.fuel.core.Response
 import com.github.kittinunf.fuel.core.ResponseDeserializable
-import com.github.kittinunf.fuel.rx.rx_responseObject
-import com.github.kittinunf.result.Result
+import com.github.kittinunf.fuel.rx.rxResponseObjectPair
 import io.reactivex.Single
 import mu.KotlinLogging
 
@@ -18,13 +16,13 @@ open class ApiLoader<T : Any>(
     private var baseUrl: String = "https://$domain.my.opendatasoft.com/api/records/1.0/search/?"
     private val logger = KotlinLogging.logger {}
 
-    fun queryList(query: ApiQuery): Single<Pair<Response, Result<ListResult<T>, FuelError>>> {
+    fun queryList(query: ApiQuery): Single<Pair<Response, ListResult<T>>> {
         var url = baseUrl
         for ((k, v) in query.buildParams()) {
             url += "$k=$v&"
         }
 
         // TODO Cache
-        return Fuel.get(url).rx_responseObject(deserializer)
+        return Fuel.get(url).rxResponseObjectPair(deserializer)
     }
 }

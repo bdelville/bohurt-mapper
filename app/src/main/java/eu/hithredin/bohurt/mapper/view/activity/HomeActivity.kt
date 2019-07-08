@@ -20,6 +20,7 @@ import eu.hithredin.bohurt.common.mvp.view.EventMapView
 import eu.hithredin.bohurt.common.mvp.viewmodel.SearchViewModel
 import eu.hithredin.bohurt.common.utils.convertToDate
 import eu.hithredin.bohurt.mapper.R
+import eu.hithredin.bohurt.mapper.app.BohurtApp
 import eu.hithredin.bohurt.mapper.utils.addOnClickListener
 import eu.hithredin.bohurt.mapper.utils.toLatLng
 import eu.hithredin.bohurt.mapper.view.framework.BaseActivity
@@ -35,7 +36,8 @@ import java.util.Date
  */
 class HomeActivity : BaseActivity(), EventMapView, DatePickerDialog.OnDateSetListener {
 
-    private val presenter by loadPresenter { EventMapPresenter(this, injector) }
+    // val kodein by closestKodein()
+    private val presenter by loadPresenter { EventMapPresenter((application as BohurtApp).kodein, this) }
 
     private lateinit var googleMap: GoogleMap
     private lateinit var iconTourney: BitmapDescriptor

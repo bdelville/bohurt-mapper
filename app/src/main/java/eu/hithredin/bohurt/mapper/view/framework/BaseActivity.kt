@@ -4,23 +4,20 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
-import com.github.salomonbrys.kodein.KodeinInjector
 import eu.hithredin.bohurt.common.mvp.presenter.Presenter
 import eu.hithredin.bohurt.mapper.R
-import eu.hithredin.bohurt.mapper.app.BohurtApp
 
 /**
  * Functionality needed by all activities are declared here
  */
 abstract class BaseActivity : AppCompatActivity() {
-    protected val injector = KodeinInjector()
 
     // Allow Composition of Presenters for a View
-    private var presenters: List<Lazy<Presenter>> = emptyList()
+    private val presenters: MutableList<Lazy<Presenter>> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        injector.inject((application as BohurtApp).kodein)
+        // (applicationContext as BohurtApp).kodein.inject((application as BohurtApp).kodein)
     }
 
     override fun onStart() {
@@ -41,7 +38,7 @@ abstract class BaseActivity : AppCompatActivity() {
      */
     protected fun setFragment(fragment: Fragment) {
         if (fragment.arguments == null) fragment.arguments = Bundle()
-        fragment.arguments.putAll(intent.extras)
+        fragment.arguments!!.putAll(intent.extras)
 
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_layout, fragment, "MainFragment")
