@@ -74,7 +74,7 @@ class EventMapPresenter(kodein: Kodein, val view: EventMapView) : Presenter {
 
         // TODO Error handling now?
         result.second.let {
-            view.setEvents(it.data()?.filter { event -> event.isValid() }.orEmpty(),
+            view.setEvents(it.data().filter { event -> event.isValid() },
                 true)
         }
         result.first.let {

@@ -15,11 +15,6 @@ abstract class BaseActivity : AppCompatActivity() {
     // Allow Composition of Presenters for a View
     private val presenters: MutableList<Lazy<Presenter>> = ArrayList()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        // (applicationContext as BohurtApp).kodein.inject((application as BohurtApp).kodein)
-    }
-
     override fun onStart() {
         super.onStart()
         presenters.forEach { it.value.screenOpen() }

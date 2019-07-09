@@ -3,7 +3,7 @@ package eu.hithredin.bohurt.common.data
 import eu.hithredin.ktopendatasoft.ApiQuery
 import java.util.*
 
-val dataSetEvents = "bohurt-events"
+const val dataSetEvents = "bohurt-events"
 
 /**
  * Container of parameters to query an event

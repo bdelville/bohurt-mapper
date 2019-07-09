@@ -3,8 +3,8 @@ package eu.hithredin.ktopendatasoft
 /**
  * Open Data Soft data result
  */
-data class ListResult<T : Any>(val nhits: Int, val records: List<ItemResult<T>>) {
-    fun data(): List<T>? {
+data class ListResult<T : Any>(val nhits: Int = 0, val records: List<ItemResult<T>> = emptyList()) {
+    fun data(): List<T> {
         return records.map { item -> item.fields }
     }
 }

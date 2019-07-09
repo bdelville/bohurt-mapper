@@ -49,13 +49,13 @@ class EventFragment : BaseFragment() {
         text_country.text = event.country
         text_date.text = DateFormat.getLongDateFormat(context).format(event.date)
 
-        var description = if (event.fight_categories != null) "${event.fight_categories}\n\n" else ""
-        description += if (event.description != null) "${event.description}\n\n" else ""
+        var description = if (event.fight_categories.isNotEmpty()) "${event.fight_categories}\n\n" else ""
+        description += if (event.description.isNotEmpty()) "${event.description}\n\n" else ""
         text_details.text = description
 
-        if(event.link != null) {
+        if(event.link.isNotEmpty()) {
             btn_details.visibility = VISIBLE
-            btn_details.setOnClickListener { openUrlLink(context!!, event.link!!) }
+            btn_details.setOnClickListener { openUrlLink(context!!, event.link) }
         } else {
             btn_details.visibility = GONE
         }
